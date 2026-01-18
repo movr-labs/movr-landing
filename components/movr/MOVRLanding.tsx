@@ -332,7 +332,7 @@ export default function MOVRLanding() {
             <div className="relative mt-3 max-h-[180px] overflow-y-hidden md:max-h-[260px] md:overflow-y-auto md:pr-1">
               <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto md:grid md:grid-cols-2 md:gap-3 md:overflow-visible md:snap-none">
                 {[
-                  "/screen.png",
+                  
                   "/screen2.png",
                   "/screen3.png",
                   "/screen4.png",
@@ -458,7 +458,7 @@ export default function MOVRLanding() {
                 <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-6">
                 {[
                   "/screen2.png",
-                  "/screen.png",
+                
                   
                   "/screen3.png",
                   "/screen4.png",
