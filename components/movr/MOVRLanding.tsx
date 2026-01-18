@@ -98,11 +98,11 @@ function Modal({
                 <span className="text-[12px] uppercase tracking-[0.12em] text-white/55">
                   Website (optional)
                 </span>
-                <input
-                  type="url"
-                  placeholder="academy.com"
-                  className="mt-2 h-11 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/35 outline-none focus:border-white/25"
-                />
+              <input
+                type="text"
+                placeholder="academy.com"
+                className="mt-2 h-11 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/35 outline-none focus:border-white/25"
+              />
               </label>
 
               <button
