@@ -7,7 +7,10 @@ export async function POST(req: Request) {
     const { name, email, message, form } = await req.json();
 
     if (!process.env.RESEND_API_KEY) {
-      return NextResponse.json({ ok: false, error: "Missing RESEND_API_KEY" }, { status: 500 });
+      return NextResponse.json(
+        { ok: false, error: "Missing RESEND_API_KEY" },
+        { status: 500 }
+      );
     }
 
     const payload = {
@@ -34,7 +37,10 @@ export async function POST(req: Request) {
 
     if (!res.ok) {
       const errText = await res.text();
-      return NextResponse.json({ ok: false, error: errText }, { status: 500 });
+      return NextResponse.json(
+        { ok: false, error: errText },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({ ok: true });
