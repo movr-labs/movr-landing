@@ -12,6 +12,9 @@ function Modal({
   onClose,
   submitLabel,
   children,
+  onSubmit,
+  submitted,
+  successMessage,
 }: {
   open: boolean;
   title: string;
@@ -19,18 +22,21 @@ function Modal({
   onClose: () => void;
   submitLabel: string;
   children?: React.ReactNode;
+  onSubmit?: () => void;
+  submitted?: boolean;
+  successMessage?: string;
 }) {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center px-5">
+    <div className="fixed inset-0 z-50 flex items-end justify-center px-4 py-6 sm:items-center sm:px-5">
       <div
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
       />
-      <div className="relative w-full max-w-lg overflow-hidden rounded-3xl border border-white/10 bg-[#0C0F1D] shadow-[0_40px_120px_rgba(0,0,0,0.6)]">
+      <div className="relative w-full max-w-lg overflow-hidden rounded-3xl border border-white/10 bg-[#0C0F1D] shadow-[0_40px_120px_rgba(0,0,0,0.6)] sm:rounded-3xl">
         <div className="absolute inset-0 bg-[radial-gradient(500px_240px_at_0%_0%,rgba(255,255,255,0.10),transparent_60%),radial-gradient(460px_260px_at_100%_0%,rgba(120,160,255,0.12),transparent_60%)]" />
-        <div className="relative p-6 sm:p-8">
+        <div className="relative p-5 sm:p-8">
           <div className="flex items-start justify-between gap-6">
             <div>
               <div className="text-xl font-semibold text-white">{title}</div>
@@ -46,72 +52,90 @@ function Modal({
             </button>
           </div>
 
-          {children ?? (
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className="mt-6 space-y-4"
-            >
-              <label className="block">
-                <span className="text-[12px] uppercase tracking-[0.12em] text-white/55">
-                  Academy name
-                </span>
-                <input
-                  type="text"
-                  required
-                  placeholder="Academy name"
-                  className="mt-2 h-11 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/35 outline-none focus:border-white/25"
-                />
-              </label>
-              <label className="block">
-                <span className="text-[12px] uppercase tracking-[0.12em] text-white/55">
-                  Your name
-                </span>
-                <input
-                  type="text"
-                  required
-                  placeholder="Your name"
-                  className="mt-2 h-11 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/35 outline-none focus:border-white/25"
-                />
-              </label>
-              <label className="block">
-                <span className="text-[12px] uppercase tracking-[0.12em] text-white/55">
-                  Email
-                </span>
-                <input
-                  type="email"
-                  required
-                  placeholder="you@academy.com"
-                  className="mt-2 h-11 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/35 outline-none focus:border-white/25"
-                />
-              </label>
-              <label className="block">
-                <span className="text-[12px] uppercase tracking-[0.12em] text-white/55">
-                  Phone
-                </span>
-                <input
-                  type="tel"
-                  placeholder="+46..."
-                  className="mt-2 h-11 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/35 outline-none focus:border-white/25"
-                />
-              </label>
-              <label className="block">
-                <span className="text-[12px] uppercase tracking-[0.12em] text-white/55">
-                  Website (optional)
-                </span>
-              <input
-                type="text"
-                placeholder="academy.com"
-                className="mt-2 h-11 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/35 outline-none focus:border-white/25"
-              />
-              </label>
-
+          {submitted ? (
+            <div className="mt-6">
+              <div className="text-sm text-white/70">
+                {successMessage ?? "Thanks! We will be in touch shortly."}
+              </div>
               <button
-                type="submit"
-                className="mt-2 h-12 w-full rounded-2xl bg-white text-sm font-semibold text-black hover:bg-white/90"
+                type="button"
+                onClick={onClose}
+                className="mt-6 h-12 w-full rounded-2xl bg-white text-sm font-semibold text-black hover:bg-white/90"
               >
-                {submitLabel}
+                Close
               </button>
-            </form>
+            </div>
+          ) : (
+            children ?? (
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              onSubmit?.();
+            }}
+            className="mt-5 space-y-3 sm:mt-6 sm:space-y-4"
+          >
+                <label className="block">
+                  <span className="text-[12px] uppercase tracking-[0.12em] text-white/55">
+                    Academy name
+                  </span>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Academy name"
+                className="mt-2 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/35 outline-none focus:border-white/25 sm:h-11"
+              />
+            </label>
+                <label className="block">
+                  <span className="text-[12px] uppercase tracking-[0.12em] text-white/55">
+                    Your name
+                  </span>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Your name"
+                className="mt-2 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/35 outline-none focus:border-white/25 sm:h-11"
+              />
+            </label>
+                <label className="block">
+                  <span className="text-[12px] uppercase tracking-[0.12em] text-white/55">
+                    Email
+                  </span>
+                  <input
+                    type="email"
+                    required
+                    placeholder="you@academy.com"
+                className="mt-2 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/35 outline-none focus:border-white/25 sm:h-11"
+              />
+            </label>
+                <label className="block">
+                  <span className="text-[12px] uppercase tracking-[0.12em] text-white/55">
+                    Phone
+                  </span>
+                  <input
+                    type="tel"
+                    placeholder="+46..."
+                className="mt-2 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/35 outline-none focus:border-white/25 sm:h-11"
+              />
+            </label>
+                <label className="block">
+                  <span className="text-[12px] uppercase tracking-[0.12em] text-white/55">
+                    Website (optional)
+                  </span>
+                  <input
+                    type="text"
+                    placeholder="academy.com"
+                className="mt-2 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/35 outline-none focus:border-white/25 sm:h-11"
+              />
+            </label>
+
+            <button
+              type="submit"
+              className="mt-2 h-11 w-full rounded-2xl bg-white text-sm font-semibold text-black hover:bg-white/90 sm:h-12"
+            >
+              {submitLabel}
+            </button>
+          </form>
+            )
           )}
         </div>
       </div>
@@ -123,9 +147,11 @@ export default function MOVRLanding() {
   const [pilotOpen, setPilotOpen] = useState(false);
   const [waitlistOpen, setWaitlistOpen] = useState(false);
   const [galleryOpen, setGalleryOpen] = useState(false);
+  const [pilotSubmitted, setPilotSubmitted] = useState(false);
+  const [waitlistSubmitted, setWaitlistSubmitted] = useState(false);
 
   return (
-    <div className="relative h-screen overflow-hidden text-white">
+    <div className="relative min-h-screen overflow-y-auto text-white">
       <ManaBackground
         accent="rgba(130,90,255,0.42)"
         accent2="rgba(60,210,255,0.16)"
@@ -135,11 +161,13 @@ export default function MOVRLanding() {
       <div className="relative z-10 mx-auto max-w-7xl px-5">
         <div className="flex h-16 items-center justify-end">
           <div className="flex items-center gap-2">
-            <span className="text-2xl font-semibold tracking-wide">MOVR</span>
+            <span className="text-xl font-semibold tracking-wide md:text-2xl">
+              MOVR
+            </span>
             <img
               src="/loggautantext.png"
               alt="MOVR logo"
-              className="mt-2 h-6 w-6 scale-250 object-cover object-[50%_65%]"
+              className="mt-1 h-5 w-5 scale-200 object-cover object-[50%_65%] md:mt-2 md:h-6 md:w-6 md:scale-250"
             />
           </div>
         </div>
@@ -153,7 +181,7 @@ export default function MOVRLanding() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="text-balance text-[44px] font-semibold tracking-tight md:text-[60px]"
+            className="text-balance text-[32px] font-semibold tracking-tight sm:text-[38px] md:text-[60px]"
           >
             More time for athletes. Less administration.
           </motion.h1>
@@ -162,7 +190,7 @@ export default function MOVRLanding() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, ease: "easeOut", delay: 0.05 }}
-            className="mt-4 text-pretty text-[15px] leading-relaxed text-white/62"
+            className="mt-3 text-pretty text-[14px] leading-relaxed text-white/62 md:mt-4 md:text-[15px]"
           >
             Everything academys need to reduce admin — built into one system.
           </motion.p>
@@ -170,14 +198,14 @@ export default function MOVRLanding() {
 
         {/* ====== TVÅ LÅDOR BREDVID VARANDRA ======
             VÄNSTERKORTET ÄR EXAKT ORÖRT (copy/paste från din kod) */}
-        <div className="mt-6 flex flex-col gap-6 md:flex-row md:items-stretch">
+        <div className="mt-5 flex flex-col gap-4 md:mt-6 md:flex-row md:items-stretch md:gap-6">
           {/* LEFT CARD (ORÖRD) */}
-          <div className="relative flex w-full max-w-xl flex-col overflow-hidden rounded-3xl border border-white/15 bg-white/[0.06] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.5)] backdrop-blur">
+          <div className="relative flex w-full flex-col overflow-hidden rounded-3xl border border-white/15 bg-white/[0.06] p-4 shadow-[0_24px_70px_rgba(0,0,0,0.5)] backdrop-blur md:max-w-xl md:p-5">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(600px_240px_at_0%_0%,rgba(255,255,255,0.12),transparent_60%),radial-gradient(500px_300px_at_100%_20%,rgba(120,200,255,0.10),transparent_60%)]" />
             <div className="relative text-sm font-medium text-white/90">
               Everything your academy needs - in one system
             </div>
-            <ul className="relative mt-4 flex flex-1 flex-col justify-between text-[12px] leading-snug text-white/62">
+            <ul className="relative mt-3 flex flex-1 flex-col justify-between space-y-1.5 text-[11px] leading-snug text-white/62 sm:text-[12px] md:mt-4 md:space-y-2">
               <li className="flex items-start gap-3">
                 <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-white/60" />
                 <span>Automated payments (direct debit, card & Swish)</span>
@@ -214,7 +242,7 @@ export default function MOVRLanding() {
           </div>
 
           {/* RIGHT CARD (SAME OUTER SIZE/STYLING) */}
-          <div className="relative w-full max-w-xl overflow-hidden rounded-3xl border border-white/15 bg-white/[0.06] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.5)] backdrop-blur">
+          <div className="relative w-full overflow-hidden rounded-3xl border border-white/15 bg-white/[0.06] p-4 shadow-[0_24px_70px_rgba(0,0,0,0.5)] backdrop-blur md:max-w-xl md:p-5">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(600px_240px_at_0%_0%,rgba(255,255,255,0.12),transparent_60%),radial-gradient(500px_300px_at_100%_20%,rgba(120,200,255,0.10),transparent_60%)]" />
 
             <div className="relative flex items-center justify-between">
@@ -231,8 +259,8 @@ export default function MOVRLanding() {
             </div>
 
             {/* Detta gör att kortets höjd inte “drar iväg”. Innehållet scrollar vid behov. */}
-            <div className="relative mt-3 max-h-[260px] overflow-y-auto pr-1">
-              <div className="grid grid-cols-2 gap-3">
+            <div className="relative mt-3 max-h-[180px] overflow-y-hidden md:max-h-[260px] md:overflow-y-auto md:pr-1">
+              <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto md:grid md:grid-cols-2 md:gap-3 md:overflow-visible md:snap-none">
                 {[
                   "/screen.png",
                   "/screen2.png",
@@ -246,12 +274,12 @@ export default function MOVRLanding() {
                 ].map((src) => (
                   <div
                     key={src}
-                    className="overflow-hidden rounded-2xl border border-white/10 bg-white/5"
+                    className="min-w-[60%] snap-center overflow-hidden rounded-2xl border border-white/10 bg-white/5 md:min-w-0"
                   >
                     <img
                       src={src}
                       alt="MOVR screen"
-                      className="h-32 w-full object-cover"
+                      className="h-24 w-full object-cover sm:h-28 md:h-32"
                     />
                   </div>
                 ))}
@@ -264,16 +292,22 @@ export default function MOVRLanding() {
         <div className="mt-7 flex flex-col gap-3 sm:flex-row">
           <button
             type="button"
-            onClick={() => setPilotOpen(true)}
-            className="inline-flex h-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#16275E] via-[#1E2F78] to-[#3F5DDB] px-5 text-sm font-medium text-white shadow-lg shadow-[#1E2F78]/45 hover:from-[#142255] hover:via-[#1A2A6A] hover:to-[#3550C3]"
+            onClick={() => {
+              setPilotSubmitted(false);
+              setPilotOpen(true);
+            }}
+            className="inline-flex h-12 w-full items-center justify-center rounded-2xl bg-gradient-to-br from-[#16275E] via-[#1E2F78] to-[#3F5DDB] px-5 text-sm font-medium text-white shadow-lg shadow-[#1E2F78]/45 hover:from-[#142255] hover:via-[#1A2A6A] hover:to-[#3550C3] sm:w-auto"
           >
             Become a pilot customer (for free)
           </button>
 
           <button
             type="button"
-            onClick={() => setWaitlistOpen(true)}
-            className="group inline-flex h-12 items-center justify-center rounded-2xl bg-white px-5 text-sm font-medium text-black shadow-lg shadow-black/25 hover:bg-white/90"
+            onClick={() => {
+              setWaitlistSubmitted(false);
+              setWaitlistOpen(true);
+            }}
+            className="group inline-flex h-12 w-full items-center justify-center rounded-2xl bg-white px-5 text-sm font-medium text-black shadow-lg shadow-black/25 hover:bg-white/90 sm:w-auto"
           >
             Join waitlist
             <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -291,6 +325,9 @@ export default function MOVRLanding() {
         subtitle="Tell us about your academy and we will reach out with next steps."
         submitLabel="Apply for pilot"
         onClose={() => setPilotOpen(false)}
+        onSubmit={() => setPilotSubmitted(true)}
+        submitted={pilotSubmitted}
+        successMessage="Thanks! We received your pilot application."
       />
       <Modal
         open={waitlistOpen}
@@ -298,19 +335,27 @@ export default function MOVRLanding() {
         subtitle="Be first to hear when we launch and open access."
         submitLabel="Join waitlist"
         onClose={() => setWaitlistOpen(false)}
+        onSubmit={() => setWaitlistSubmitted(true)}
+        submitted={waitlistSubmitted}
+        successMessage="Thanks! You're on the waitlist."
       />
       {galleryOpen && (
-        <div className="fixed inset-0 z-50 bg-[#07070B]">
-          <button
-            type="button"
+        <div className="fixed inset-0 z-50">
+          <div
+            className="absolute inset-0 bg-black/55 backdrop-blur-sm"
             onClick={() => setGalleryOpen(false)}
-            className="absolute right-4 top-4 z-10 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-white/80 hover:bg-white/20"
-          >
-            Close
-          </button>
-          <div className="flex h-full w-full items-center">
-            <div className="mx-auto w-full max-w-6xl px-5">
-              <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-6">
+          />
+          <div className="relative z-10">
+            <button
+              type="button"
+              onClick={() => setGalleryOpen(false)}
+              className="absolute right-4 top-4 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-white/80 hover:bg-white/20"
+            >
+              Close
+            </button>
+            <div className="flex h-full w-full items-center">
+              <div className="mx-auto w-full max-w-6xl px-5">
+                <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-6">
                 {[
                   "/screen2.png",
                   "/screen.png",
@@ -334,9 +379,10 @@ export default function MOVRLanding() {
                     />
                   </div>
                 ))}
-              </div>
-              <div className="text-center text-xs text-white/50">
-                Swipe to view more
+                </div>
+                <div className="text-center text-xs text-white/50">
+                  Swipe to view more
+                </div>
               </div>
             </div>
           </div>
