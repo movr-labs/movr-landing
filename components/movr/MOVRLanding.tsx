@@ -82,9 +82,9 @@ function Modal({
                     type="text"
                     required
                     placeholder="Academy name"
-                className="mt-2 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/35 outline-none focus:border-white/25 sm:h-11"
-              />
-            </label>
+                  className="mt-2 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-base text-white placeholder:text-white/35 outline-none focus:border-white/25 sm:h-11 sm:text-sm"
+                />
+              </label>
                 <label className="block">
                   <span className="text-[12px] uppercase tracking-[0.12em] text-white/55">
                     Your name
@@ -93,9 +93,9 @@ function Modal({
                     type="text"
                     required
                     placeholder="Your name"
-                className="mt-2 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/35 outline-none focus:border-white/25 sm:h-11"
-              />
-            </label>
+                  className="mt-2 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-base text-white placeholder:text-white/35 outline-none focus:border-white/25 sm:h-11 sm:text-sm"
+                />
+              </label>
                 <label className="block">
                   <span className="text-[12px] uppercase tracking-[0.12em] text-white/55">
                     Email
@@ -104,9 +104,9 @@ function Modal({
                     type="email"
                     required
                     placeholder="you@academy.com"
-                className="mt-2 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/35 outline-none focus:border-white/25 sm:h-11"
-              />
-            </label>
+                  className="mt-2 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-base text-white placeholder:text-white/35 outline-none focus:border-white/25 sm:h-11 sm:text-sm"
+                />
+              </label>
                 <label className="block">
                   <span className="text-[12px] uppercase tracking-[0.12em] text-white/55">
                     Phone
@@ -114,9 +114,9 @@ function Modal({
                   <input
                     type="tel"
                     placeholder="+46..."
-                className="mt-2 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/35 outline-none focus:border-white/25 sm:h-11"
-              />
-            </label>
+                  className="mt-2 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-base text-white placeholder:text-white/35 outline-none focus:border-white/25 sm:h-11 sm:text-sm"
+                />
+              </label>
                 <label className="block">
                   <span className="text-[12px] uppercase tracking-[0.12em] text-white/55">
                     Website (optional)
@@ -124,9 +124,9 @@ function Modal({
                   <input
                     type="text"
                     placeholder="academy.com"
-                className="mt-2 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/35 outline-none focus:border-white/25 sm:h-11"
-              />
-            </label>
+                  className="mt-2 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-base text-white placeholder:text-white/35 outline-none focus:border-white/25 sm:h-11 sm:text-sm"
+                />
+              </label>
 
             <button
               type="submit"
