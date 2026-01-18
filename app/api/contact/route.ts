@@ -4,7 +4,16 @@ export const runtime = "nodejs";
 
 export async function POST(req: Request) {
   try {
-    const { name, email, message, form } = await req.json();
+    const {
+      name,
+      email,
+      message,
+      form,
+      academyName,
+      contactName,
+      phone,
+      website,
+    } = await req.json();
 
     if (!process.env.RESEND_API_KEY) {
       return NextResponse.json(
@@ -19,8 +28,13 @@ export async function POST(req: Request) {
       reply_to: email,
       subject: `New contact form (${form || "website"})`,
       html: `
-        <strong>Name:</strong> ${String(name || "")}<br/>
-        <strong>Email:</strong> ${String(email || "")}<br/><br/>
+        <strong>ACADEMY NAME:</strong> ${String(
+          academyName || name || ""
+        )}<br/>
+        <strong>YOUR NAME:</strong> ${String(contactName || "")}<br/>
+        <strong>EMAIL:</strong> ${String(email || "")}<br/>
+        <strong>PHONE:</strong> ${String(phone || "")}<br/>
+        <strong>WEBSITE:</strong> ${String(website || "")}<br/><br/>
         <strong>Message:</strong><br/>
         ${String(message || "")}
       `,

@@ -99,6 +99,10 @@ function Modal({
                     email,
                     message,
                     form,
+                    academyName,
+                    contactName,
+                    phone,
+                    website,
                   };
                   onSubmit?.(payload);
                 }}
@@ -188,6 +192,10 @@ type ContactPayload = {
   email: string;
   message: string;
   form: string;
+  academyName: string;
+  contactName: string;
+  phone: string;
+  website: string;
 };
 
 export default function MOVRLanding() {
