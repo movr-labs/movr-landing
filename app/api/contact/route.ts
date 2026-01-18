@@ -38,7 +38,10 @@ export async function POST(req: Request) {
     if (!res.ok) {
       const errText = await res.text();
       return NextResponse.json(
-        { ok: false, error: errText },
+        {
+          ok: false,
+          error: `Resend error (${res.status}): ${errText}`,
+        },
         { status: 500 }
       );
     }

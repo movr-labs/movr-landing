@@ -15,6 +15,7 @@ function Modal({
   onSubmit,
   submitted,
   successMessage,
+  errorMessage,
 }: {
   open: boolean;
   title: string;
@@ -22,9 +23,10 @@ function Modal({
   onClose: () => void;
   submitLabel: string;
   children?: React.ReactNode;
-  onSubmit?: () => void;
+  onSubmit?: (data: ContactPayload) => Promise<void> | void;
   submitted?: boolean;
   successMessage?: string;
+  errorMessage?: string | null;
 }) {
   if (!open) return null;
 
@@ -67,13 +69,41 @@ function Modal({
             </div>
           ) : (
             children ?? (
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              onSubmit?.();
-            }}
-            className="mt-5 space-y-3 sm:mt-6 sm:space-y-4"
-          >
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const formEl = e.currentTarget;
+                  const formData = new FormData(formEl);
+                  const academyName = String(
+                    formData.get("academy_name") || ""
+                  );
+                  const contactName = String(
+                    formData.get("contact_name") || ""
+                  );
+                  const phone = String(formData.get("phone") || "");
+                  const website = String(formData.get("website") || "");
+                  const email = String(formData.get("email") || "");
+                  const form = String(formData.get("form") || "");
+                  const message = [
+                    `Academy: ${academyName}`,
+                    `Contact: ${contactName}`,
+                    `Email: ${email}`,
+                    phone ? `Phone: ${phone}` : null,
+                    website ? `Website: ${website}` : null,
+                  ]
+                    .filter(Boolean)
+                    .join("\n");
+
+                  const payload: ContactPayload = {
+                    name: academyName,
+                    email,
+                    message,
+                    form,
+                  };
+                  onSubmit?.(payload);
+                }}
+                className="mt-5 space-y-3 sm:mt-6 sm:space-y-4"
+              >
                 <label className="block">
                   <span className="text-[12px] uppercase tracking-[0.12em] text-white/55">
                     Academy name
@@ -82,9 +112,10 @@ function Modal({
                     type="text"
                     required
                     placeholder="Academy name"
-                  className="mt-2 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-base text-white placeholder:text-white/35 outline-none focus:border-white/25 sm:h-11 sm:text-sm"
-                />
-              </label>
+                    name="academy_name"
+                    className="mt-2 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-base text-white placeholder:text-white/35 outline-none focus:border-white/25 sm:h-11 sm:text-sm"
+                  />
+                </label>
                 <label className="block">
                   <span className="text-[12px] uppercase tracking-[0.12em] text-white/55">
                     Your name
@@ -93,9 +124,10 @@ function Modal({
                     type="text"
                     required
                     placeholder="Your name"
-                  className="mt-2 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-base text-white placeholder:text-white/35 outline-none focus:border-white/25 sm:h-11 sm:text-sm"
-                />
-              </label>
+                    name="contact_name"
+                    className="mt-2 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-base text-white placeholder:text-white/35 outline-none focus:border-white/25 sm:h-11 sm:text-sm"
+                  />
+                </label>
                 <label className="block">
                   <span className="text-[12px] uppercase tracking-[0.12em] text-white/55">
                     Email
@@ -104,9 +136,10 @@ function Modal({
                     type="email"
                     required
                     placeholder="you@academy.com"
-                  className="mt-2 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-base text-white placeholder:text-white/35 outline-none focus:border-white/25 sm:h-11 sm:text-sm"
-                />
-              </label>
+                    name="email"
+                    className="mt-2 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-base text-white placeholder:text-white/35 outline-none focus:border-white/25 sm:h-11 sm:text-sm"
+                  />
+                </label>
                 <label className="block">
                   <span className="text-[12px] uppercase tracking-[0.12em] text-white/55">
                     Phone
@@ -114,9 +147,10 @@ function Modal({
                   <input
                     type="tel"
                     placeholder="+46..."
-                  className="mt-2 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-base text-white placeholder:text-white/35 outline-none focus:border-white/25 sm:h-11 sm:text-sm"
-                />
-              </label>
+                    name="phone"
+                    className="mt-2 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-base text-white placeholder:text-white/35 outline-none focus:border-white/25 sm:h-11 sm:text-sm"
+                  />
+                </label>
                 <label className="block">
                   <span className="text-[12px] uppercase tracking-[0.12em] text-white/55">
                     Website (optional)
@@ -124,16 +158,22 @@ function Modal({
                   <input
                     type="text"
                     placeholder="academy.com"
-                  className="mt-2 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-base text-white placeholder:text-white/35 outline-none focus:border-white/25 sm:h-11 sm:text-sm"
-                />
-              </label>
+                    name="website"
+                    className="mt-2 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-base text-white placeholder:text-white/35 outline-none focus:border-white/25 sm:h-11 sm:text-sm"
+                  />
+                </label>
+                <input type="hidden" name="form" value={title} />
 
-            <button
-              type="submit"
-              className="mt-2 h-11 w-full rounded-2xl bg-white text-sm font-semibold text-black hover:bg-white/90 sm:h-12"
-            >
-              {submitLabel}
-            </button>
+                {errorMessage && (
+                  <div className="text-xs text-red-300">{errorMessage}</div>
+                )}
+
+                <button
+                  type="submit"
+                  className="mt-2 h-11 w-full rounded-2xl bg-white text-sm font-semibold text-black hover:bg-white/90 sm:h-12"
+                >
+                  {submitLabel}
+                </button>
           </form>
             )
           )}
@@ -143,12 +183,34 @@ function Modal({
   );
 }
 
+type ContactPayload = {
+  name: string;
+  email: string;
+  message: string;
+  form: string;
+};
+
 export default function MOVRLanding() {
   const [pilotOpen, setPilotOpen] = useState(false);
   const [waitlistOpen, setWaitlistOpen] = useState(false);
   const [galleryOpen, setGalleryOpen] = useState(false);
   const [pilotSubmitted, setPilotSubmitted] = useState(false);
   const [waitlistSubmitted, setWaitlistSubmitted] = useState(false);
+  const [pilotError, setPilotError] = useState<string | null>(null);
+  const [waitlistError, setWaitlistError] = useState<string | null>(null);
+
+  const sendContact = async (payload: ContactPayload) => {
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({}));
+      throw new Error(body?.error || "Request failed");
+    }
+  };
 
   return (
     <div className="relative min-h-screen overflow-y-auto text-white">
@@ -325,9 +387,24 @@ export default function MOVRLanding() {
         subtitle="Tell us about your academy and we will reach out with next steps."
         submitLabel="Apply for pilot"
         onClose={() => setPilotOpen(false)}
-        onSubmit={() => setPilotSubmitted(true)}
+        onSubmit={async (payload) => {
+          try {
+            setPilotError(null);
+            await sendContact({
+              ...payload,
+              message: "Pilot customer application",
+              form: "pilot",
+            });
+            setPilotSubmitted(true);
+          } catch (e) {
+            setPilotError(
+              e instanceof Error ? e.message : "Failed to send message"
+            );
+          }
+        }}
         submitted={pilotSubmitted}
         successMessage="Thanks! We received your pilot application."
+        errorMessage={pilotError}
       />
       <Modal
         open={waitlistOpen}
@@ -335,9 +412,24 @@ export default function MOVRLanding() {
         subtitle="Be first to hear when we launch and open access."
         submitLabel="Join waitlist"
         onClose={() => setWaitlistOpen(false)}
-        onSubmit={() => setWaitlistSubmitted(true)}
+        onSubmit={async (payload) => {
+          try {
+            setWaitlistError(null);
+            await sendContact({
+              ...payload,
+              message: "Waitlist signup",
+              form: "waitlist",
+            });
+            setWaitlistSubmitted(true);
+          } catch (e) {
+            setWaitlistError(
+              e instanceof Error ? e.message : "Failed to send message"
+            );
+          }
+        }}
         submitted={waitlistSubmitted}
         successMessage="Thanks! You're on the waitlist."
+        errorMessage={waitlistError}
       />
       {galleryOpen && (
         <div className="fixed inset-0 z-50">
