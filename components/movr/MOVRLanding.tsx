@@ -272,40 +272,40 @@ export default function MOVRLanding() {
           {/* LEFT CARD (ORÖRD) */}
           <div className="relative flex w-full flex-col overflow-hidden rounded-3xl border border-white/15 bg-white/[0.06] p-4 shadow-[0_24px_70px_rgba(0,0,0,0.5)] backdrop-blur md:max-w-xl md:p-5">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(600px_240px_at_0%_0%,rgba(255,255,255,0.12),transparent_60%),radial-gradient(500px_300px_at_100%_20%,rgba(120,200,255,0.10),transparent_60%)]" />
-            <div className="relative text-sm font-medium text-white/90">
+            <div className="relative text-base font-semibold text-white/95">
               Everything your academy needs - in one system
             </div>
-            <ul className="relative mt-3 flex flex-1 flex-col justify-between space-y-1.5 text-[11px] leading-snug text-white/62 sm:text-[12px] md:mt-4 md:space-y-2">
+            <ul className="relative mt-4 flex flex-1 flex-col justify-between space-y-2 text-sm leading-relaxed text-white/75">
               <li className="flex items-start gap-3">
-                <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-white/60" />
+                <span className="mt-2 h-2 w-2 rounded-full bg-white/70" />
                 <span>Automated payments (direct debit, card & Swish)</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-white/60" />
+                <span className="mt-2 h-2 w-2 rounded-full bg-white/70" />
                 <span>Automatic invoicing with built-in reminders</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-white/60" />
+                <span className="mt-2 h-2 w-2 rounded-full bg-white/70" />
                 <span>Clear financial overview and reporting</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-white/60" />
+                <span className="mt-2 h-2 w-2 rounded-full bg-white/70" />
                 <span>Member and customer management, automated</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-white/60" />
+                <span className="mt-2 h-2 w-2 rounded-full bg-white/70" />
                 <span>Booking and attendance in one place</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-white/60" />
+                <span className="mt-2 h-2 w-2 rounded-full bg-white/70" />
                 <span>Real-time statistics and insights</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-white/60" />
+                <span className="mt-2 h-2 w-2 rounded-full bg-white/70" />
                 <span>Digital access cards via mobile</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-white/60" />
+                <span className="mt-2 h-2 w-2 rounded-full bg-white/70" />
                 <span>Time tracking for staff</span>
               </li>
             </ul>
@@ -453,7 +453,7 @@ export default function MOVRLanding() {
             >
               Close
             </button>
-            <div className="flex h-full w-full items-center">
+            <div className="flex h-full w-full items-start pt-8">
               <div className="mx-auto w-full max-w-6xl px-5">
                 <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-6">
                 {[
