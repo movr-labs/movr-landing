@@ -14,7 +14,7 @@ export async function POST(req: Request) {
     }
 
     const payload = {
-      from: "Movr <onboarding@resend.dev>",
+      from: "Movr <noreply@movrlabs.io>",
       to: ["tomas@movrlabs.io", "samed@movrlabs.io"],
       reply_to: email,
       subject: `New contact form (${form || "website"})`,
