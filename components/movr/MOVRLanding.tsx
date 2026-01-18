@@ -1,0 +1,347 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { useState } from "react";
+import ManaBackground from "./ManaBackground";
+
+function Modal({
+  open,
+  title,
+  subtitle,
+  onClose,
+  submitLabel,
+  children,
+}: {
+  open: boolean;
+  title: string;
+  subtitle: string;
+  onClose: () => void;
+  submitLabel: string;
+  children?: React.ReactNode;
+}) {
+  if (!open) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-5">
+      <div
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        onClick={onClose}
+      />
+      <div className="relative w-full max-w-lg overflow-hidden rounded-3xl border border-white/10 bg-[#0C0F1D] shadow-[0_40px_120px_rgba(0,0,0,0.6)]">
+        <div className="absolute inset-0 bg-[radial-gradient(500px_240px_at_0%_0%,rgba(255,255,255,0.10),transparent_60%),radial-gradient(460px_260px_at_100%_0%,rgba(120,160,255,0.12),transparent_60%)]" />
+        <div className="relative p-6 sm:p-8">
+          <div className="flex items-start justify-between gap-6">
+            <div>
+              <div className="text-xl font-semibold text-white">{title}</div>
+              <div className="mt-1 text-sm text-white/55">{subtitle}</div>
+            </div>
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1.5 text-white/70 hover:bg-white/10"
+              aria-label="Close"
+            >
+              ✕
+            </button>
+          </div>
+
+          {children ?? (
+            <form
+              onSubmit={(e) => e.preventDefault()}
+              className="mt-6 space-y-4"
+            >
+              <label className="block">
+                <span className="text-[12px] uppercase tracking-[0.12em] text-white/55">
+                  Academy name
+                </span>
+                <input
+                  type="text"
+                  required
+                  placeholder="Academy name"
+                  className="mt-2 h-11 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/35 outline-none focus:border-white/25"
+                />
+              </label>
+              <label className="block">
+                <span className="text-[12px] uppercase tracking-[0.12em] text-white/55">
+                  Your name
+                </span>
+                <input
+                  type="text"
+                  required
+                  placeholder="Your name"
+                  className="mt-2 h-11 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/35 outline-none focus:border-white/25"
+                />
+              </label>
+              <label className="block">
+                <span className="text-[12px] uppercase tracking-[0.12em] text-white/55">
+                  Email
+                </span>
+                <input
+                  type="email"
+                  required
+                  placeholder="you@academy.com"
+                  className="mt-2 h-11 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/35 outline-none focus:border-white/25"
+                />
+              </label>
+              <label className="block">
+                <span className="text-[12px] uppercase tracking-[0.12em] text-white/55">
+                  Phone
+                </span>
+                <input
+                  type="tel"
+                  placeholder="+46..."
+                  className="mt-2 h-11 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/35 outline-none focus:border-white/25"
+                />
+              </label>
+              <label className="block">
+                <span className="text-[12px] uppercase tracking-[0.12em] text-white/55">
+                  Website (optional)
+                </span>
+                <input
+                  type="url"
+                  placeholder="academy.com"
+                  className="mt-2 h-11 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-white placeholder:text-white/35 outline-none focus:border-white/25"
+                />
+              </label>
+
+              <button
+                type="submit"
+                className="mt-2 h-12 w-full rounded-2xl bg-white text-sm font-semibold text-black hover:bg-white/90"
+              >
+                {submitLabel}
+              </button>
+            </form>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function MOVRLanding() {
+  const [pilotOpen, setPilotOpen] = useState(false);
+  const [waitlistOpen, setWaitlistOpen] = useState(false);
+  const [galleryOpen, setGalleryOpen] = useState(false);
+
+  return (
+    <div className="relative h-screen overflow-hidden text-white">
+      <ManaBackground
+        accent="rgba(130,90,255,0.42)"
+        accent2="rgba(60,210,255,0.16)"
+      />
+
+      {/* Top (bara bredare container så allt får plats) */}
+      <div className="relative z-10 mx-auto max-w-7xl px-5">
+        <div className="flex h-16 items-center justify-end">
+          <div className="flex items-center gap-2">
+            <span className="text-2xl font-semibold tracking-wide">MOVR</span>
+            <img
+              src="/loggautantext.png"
+              alt="MOVR logo"
+              className="mt-2 h-6 w-6 scale-250 object-cover object-[50%_65%]"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Hero */}
+      <main className="relative z-10 mx-auto max-w-7xl px-5 pb-24 pt-6 md:pt-10">
+        {/* Vi tar bort 2-kol layouten här för att inte tvinga korten smalare */}
+        <div className="max-w-3xl">
+          <motion.h1
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="text-balance text-[44px] font-semibold tracking-tight md:text-[60px]"
+          >
+            More time for athletes. Less administration.
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, ease: "easeOut", delay: 0.05 }}
+            className="mt-4 text-pretty text-[15px] leading-relaxed text-white/62"
+          >
+            Everything academys need to reduce admin — built into one system.
+          </motion.p>
+        </div>
+
+        {/* ====== TVÅ LÅDOR BREDVID VARANDRA ======
+            VÄNSTERKORTET ÄR EXAKT ORÖRT (copy/paste från din kod) */}
+        <div className="mt-6 flex flex-col gap-6 md:flex-row md:items-stretch">
+          {/* LEFT CARD (ORÖRD) */}
+          <div className="relative flex w-full max-w-xl flex-col overflow-hidden rounded-3xl border border-white/15 bg-white/[0.06] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.5)] backdrop-blur">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(600px_240px_at_0%_0%,rgba(255,255,255,0.12),transparent_60%),radial-gradient(500px_300px_at_100%_20%,rgba(120,200,255,0.10),transparent_60%)]" />
+            <div className="relative text-sm font-medium text-white/90">
+              Everything your academy needs - in one system
+            </div>
+            <ul className="relative mt-4 flex flex-1 flex-col justify-between text-[12px] leading-snug text-white/62">
+              <li className="flex items-start gap-3">
+                <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-white/60" />
+                <span>Automated payments (direct debit, card & Swish)</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-white/60" />
+                <span>Automatic invoicing with built-in reminders</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-white/60" />
+                <span>Clear financial overview and reporting</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-white/60" />
+                <span>Member and customer management, automated</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-white/60" />
+                <span>Booking and attendance in one place</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-white/60" />
+                <span>Real-time statistics and insights</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-white/60" />
+                <span>Digital access cards via mobile</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-white/60" />
+                <span>Time tracking for staff</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* RIGHT CARD (SAME OUTER SIZE/STYLING) */}
+          <div className="relative w-full max-w-xl overflow-hidden rounded-3xl border border-white/15 bg-white/[0.06] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.5)] backdrop-blur">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(600px_240px_at_0%_0%,rgba(255,255,255,0.12),transparent_60%),radial-gradient(500px_300px_at_100%_20%,rgba(120,200,255,0.10),transparent_60%)]" />
+
+            <div className="relative flex items-center justify-between">
+              <div className="text-sm font-medium text-white/90">
+                Product gallery
+              </div>
+              <button
+                type="button"
+                onClick={() => setGalleryOpen(true)}
+                className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70 hover:bg-white/10"
+              >
+                See more
+              </button>
+            </div>
+
+            {/* Detta gör att kortets höjd inte “drar iväg”. Innehållet scrollar vid behov. */}
+            <div className="relative mt-3 max-h-[260px] overflow-y-auto pr-1">
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  "/screen.png",
+                  "/screen2.png",
+                  "/screen3.png",
+                  "/screen4.png",
+                  "/screen5.png",
+                  "/screen6.png",
+                  "/screen7.png",
+                  "/screen8.png",
+                  "/screen10.png",
+                ].map((src) => (
+                  <div
+                    key={src}
+                    className="overflow-hidden rounded-2xl border border-white/10 bg-white/5"
+                  >
+                    <img
+                      src={src}
+                      alt="MOVR screen"
+                      className="h-32 w-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA (ORÖRD från din kod) */}
+        <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+          <button
+            type="button"
+            onClick={() => setPilotOpen(true)}
+            className="inline-flex h-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#16275E] via-[#1E2F78] to-[#3F5DDB] px-5 text-sm font-medium text-white shadow-lg shadow-[#1E2F78]/45 hover:from-[#142255] hover:via-[#1A2A6A] hover:to-[#3550C3]"
+          >
+            Become a pilot customer (for free)
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setWaitlistOpen(true)}
+            className="group inline-flex h-12 items-center justify-center rounded-2xl bg-white px-5 text-sm font-medium text-black shadow-lg shadow-black/25 hover:bg-white/90"
+          >
+            Join waitlist
+            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          </button>
+        </div>
+
+        <div className="mt-16 text-center text-[12px] text-white/38">
+          © 2026 MOVR. All rights reserved.
+        </div>
+      </main>
+
+      <Modal
+        open={pilotOpen}
+        title="Pilot customer"
+        subtitle="Tell us about your academy and we will reach out with next steps."
+        submitLabel="Apply for pilot"
+        onClose={() => setPilotOpen(false)}
+      />
+      <Modal
+        open={waitlistOpen}
+        title="Join the waitlist"
+        subtitle="Be first to hear when we launch and open access."
+        submitLabel="Join waitlist"
+        onClose={() => setWaitlistOpen(false)}
+      />
+      {galleryOpen && (
+        <div className="fixed inset-0 z-50 bg-[#07070B]">
+          <button
+            type="button"
+            onClick={() => setGalleryOpen(false)}
+            className="absolute right-4 top-4 z-10 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-white/80 hover:bg-white/20"
+          >
+            Close
+          </button>
+          <div className="flex h-full w-full items-center">
+            <div className="mx-auto w-full max-w-6xl px-5">
+              <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-6">
+                {[
+                  "/screen2.png",
+                  "/screen.png",
+                  
+                  "/screen3.png",
+                  "/screen4.png",
+                  "/screen5.png",
+                  "/screen6.png",
+                  "/screen7.png",
+                  "/screen8.png",
+                  "/screen10.png",
+                ].map((src) => (
+                  <div
+                    key={src}
+                    className="w-full min-w-full snap-center overflow-hidden rounded-3xl border border-white/10 bg-[#07070B]"
+                  >
+                    <img
+                      src={src}
+                      alt="MOVR screen"
+                      className="h-[92vh] w-full object-contain"
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="text-center text-xs text-white/50">
+                Swipe to view more
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
