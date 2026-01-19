@@ -202,7 +202,9 @@ export default function MOVRLanding() {
   const headline = "More time for athletes.\nLess administration.";
   const [pilotOpen, setPilotOpen] = useState(false);
   const [waitlistOpen, setWaitlistOpen] = useState(false);
-  const [galleryOpen, setGalleryOpen] = useState(false);
+  const [featuresExpanded, setFeaturesExpanded] = useState(false);
+  const [appPreviewOpen, setAppPreviewOpen] = useState(false);
+  const [webPreviewOpen, setWebPreviewOpen] = useState(false);
   const [pilotSubmitted, setPilotSubmitted] = useState(false);
   const [waitlistSubmitted, setWaitlistSubmitted] = useState(false);
   const [pilotError, setPilotError] = useState<string | null>(null);
@@ -240,6 +242,35 @@ export default function MOVRLanding() {
     }
   };
 
+  const featureBullets = [
+    "Automated payments (direct debit, card & Swish)",
+    "Automatic invoicing with built-in reminders",
+    "Clear financial overview and reporting",
+    "Member and customer management, automated",
+    "Booking and attendance in one place",
+    "Real-time statistics and insights",
+    "Digital access cards via mobile",
+    "Time tracking for staff",
+  ];
+  const appPreviews = [
+    "/stitch_payment_summary/campaign_management/h1.png",
+    "/stitch_payment_summary/class_schedule/h2.png",
+    "/stitch_payment_summary/customer_directory/h3.png",
+    
+    "/stitch_payment_summary/financial_kpi_overview/h5.png",
+    "/stitch_payment_summary/live_insights/h6.png",
+    "/stitch_payment_summary/membership_&_access/h7.png",
+    "/stitch_payment_summary/payment_summary/h8.png",
+    "/stitch_payment_summary/smart_scheduler/h9.png",
+    "/stitch_payment_summary/staff_timesheets/h10.png",
+  ];
+  const webPreviews = [
+    "/screen6.png",
+    "/screen7.png",
+    "/screen8.png",
+    "/screen10.png",
+  ];
+
   return (
     <div className="relative min-h-screen overflow-y-auto text-white">
       <ManaBackground
@@ -249,25 +280,23 @@ export default function MOVRLanding() {
 
       {/* Top (bara bredare container så allt får plats) */}
       <div className="relative z-10 mx-auto max-w-7xl px-5">
-        <div className="flex h-16 items-center justify-end">
-          <div className="flex items-center gap-2">
-            <span className="text-xl font-semibold tracking-wide md:text-2xl">
-              MOVR
-            </span>
-            <img
-              src="/loggautantext.png"
-              alt="MOVR logo"
-              className="mt-1 h-5 w-5 scale-200 object-cover object-[50%_65%] md:mt-2 md:h-6 md:w-6 md:scale-250"
-            />
-          </div>
+        <div className="flex h-16 items-center justify-start">
+          <img
+            src="/loggautantext.png"
+            alt="MOVR logo"
+            className="h-[5.5em] w-auto object-contain mr-[-1.3em] translate-y-[0.4em]"
+          />
+          <span className="ml-0 text-xl font-semibold tracking-wide md:text-2xl">
+            MOVR
+          </span>
         </div>
       </div>
 
       {/* Hero */}
-      <main className="relative z-10 mx-auto max-w-7xl px-5 pb-24 pt-6 md:pt-10">
+      <main className="relative z-10 mx-auto max-w-7xl px-5 pb-24 pt-10 md:pt-14">
         {/* Vi tar bort 2-kol layouten här för att inte tvinga korten smalare */}
         <div className="max-w-3xl">
-          <div className="flex min-h-[100svh] flex-col justify-center -translate-y-20 md:min-h-0 md:translate-y-0">
+          <div className="flex min-h-[100svh] flex-col justify-center -translate-y-20 md:min-h-0 md:translate-y-45">
             <motion.h1
               initial={false}
               aria-label={headline}
@@ -288,150 +317,110 @@ export default function MOVRLanding() {
               initial={{ opacity: 0, y: 10 }}
               animate={typingDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-            >
-              <p className="mt-3 text-pretty text-[14px] leading-relaxed text-white/62 md:mt-4 md:text-[15px]">
-                Everything academys need to reduce admin — built into one system.
-              </p>
-            </motion.div>
+            />
           </div>
         </div>
 
         {/* ====== TVÅ LÅDOR BREDVID VARANDRA ======
             VÄNSTERKORTET ÄR EXAKT ORÖRT (copy/paste från din kod) */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={typingDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-          className="mt-2 flex flex-col gap-8 md:mt-6 md:flex-row md:items-stretch md:gap-12"
-        >
-          {/* LEFT CARD (ORÖRD) */}
-          <div className="relative flex w-full flex-col overflow-hidden rounded-3xl border border-white/15 bg-white/[0.06] p-4 shadow-[0_24px_70px_rgba(0,0,0,0.5)] backdrop-blur md:max-w-xl md:p-5">
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(600px_240px_at_0%_0%,rgba(255,255,255,0.12),transparent_60%),radial-gradient(500px_300px_at_100%_20%,rgba(120,200,255,0.10),transparent_60%)]" />
-            <div className="relative text-base font-semibold text-white/95">
-              Everything your academy needs - in one system
-            </div>
-            <ul className="relative mt-4 flex flex-1 flex-col justify-between space-y-2 text-sm leading-relaxed text-white/75">
-              <li className="flex items-start gap-3">
-                <span className="mt-2 h-2 w-2 rounded-full bg-white/70" />
-                <span>Automated payments (direct debit, card & Swish)</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="mt-2 h-2 w-2 rounded-full bg-white/70" />
-                <span>Automatic invoicing with built-in reminders</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="mt-2 h-2 w-2 rounded-full bg-white/70" />
-                <span>Clear financial overview and reporting</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="mt-2 h-2 w-2 rounded-full bg-white/70" />
-                <span>Member and customer management, automated</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="mt-2 h-2 w-2 rounded-full bg-white/70" />
-                <span>Booking and attendance in one place</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="mt-2 h-2 w-2 rounded-full bg-white/70" />
-                <span>Real-time statistics and insights</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="mt-2 h-2 w-2 rounded-full bg-white/70" />
-                <span>Digital access cards via mobile</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="mt-2 h-2 w-2 rounded-full bg-white/70" />
-                <span>Time tracking for staff</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* RIGHT CARD (SAME OUTER SIZE/STYLING) */}
-          <div className="relative w-full overflow-hidden rounded-3xl border border-white/15 bg-white/[0.06] p-4 shadow-[0_24px_70px_rgba(0,0,0,0.5)] backdrop-blur md:max-w-xl md:p-5">
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(600px_240px_at_0%_0%,rgba(255,255,255,0.12),transparent_60%),radial-gradient(500px_300px_at_100%_20%,rgba(120,200,255,0.10),transparent_60%)]" />
-
-            <div className="relative flex items-center justify-between">
-              <div className="text-sm font-medium text-white/90">
-                Product gallery
+        <div className="md:ml-auto md:max-w-xl md:-translate-y-32">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={typingDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+            className="mt-0 flex flex-col gap-8 md:mt-4 md:flex-row md:items-stretch md:gap-12"
+          >
+            <div className="flex w-full flex-col gap-5">
+            {/* LEFT CARD */}
+            <div className="relative flex w-full flex-col overflow-hidden rounded-3xl border border-white/15 bg-white/[0.06] p-4 shadow-[0_24px_70px_rgba(0,0,0,0.5)] backdrop-blur md:self-start md:p-5">
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(600px_240px_at_0%_0%,rgba(255,255,255,0.12),transparent_60%),radial-gradient(500px_300px_at_100%_20%,rgba(120,200,255,0.10),transparent_60%)]" />
+              <div className="relative flex items-center justify-between gap-4">
+                <div className="text-base font-semibold text-white/95">
+                  Everything your academy needs - in one system
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setFeaturesExpanded((prev) => !prev)}
+                  className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70 hover:bg-white/10"
+                >
+                  {featuresExpanded ? "See less" : "See more"}
+                </button>
               </div>
-              <button
-                type="button"
-                onClick={() => setGalleryOpen(true)}
-                className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70 hover:bg-white/10"
-              >
-                See more
-              </button>
+              <ul className="relative mt-4 flex flex-col space-y-2 text-sm leading-relaxed text-white/75">
+                {featureBullets
+                  .slice(0, featuresExpanded ? featureBullets.length : 3)
+                  .map((text) => (
+                    <li key={text} className="flex items-start gap-3">
+                      <span className="mt-2 h-2 w-2 rounded-full bg-white/70" />
+                      <span>{text}</span>
+                    </li>
+                  ))}
+              </ul>
             </div>
 
-            {/* Detta gör att kortets höjd inte “drar iväg”. Innehållet scrollar vid behov. */}
-            <div className="relative mt-3 max-h-[260px] overflow-y-auto pr-1">
-              <div className="grid gap-3 md:hidden">
-                {[
-                  "/stitch_payment_summary/campaign_management/h1.png",
-                  "/stitch_payment_summary/class_schedule/h2.png",
-                  "/stitch_payment_summary/customer_directory/h3.png",
-                  
-                  "/stitch_payment_summary/financial_kpi_overview/h5.png",
-                  "/stitch_payment_summary/live_insights/h6.png",
-                  "/stitch_payment_summary/membership_&_access/h7.png",
-                  "/stitch_payment_summary/payment_summary/h8.png",
-                  "/stitch_payment_summary/smart_scheduler/h9.png",
-                  "/stitch_payment_summary/staff_timesheets/h10.png",
-                ].map((src) => (
-                  <div
-                    key={src}
-                    className="overflow-hidden rounded-2xl border border-white/10 bg-white/5"
-                  >
-                    <img
-                      src={src}
-                      alt="MOVR screen"
-                      className="h-36 w-full object-cover"
-                    />
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/[0.06] p-4 shadow-[0_20px_60px_rgba(0,0,0,0.45)] backdrop-blur">
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(460px_220px_at_0%_0%,rgba(255,255,255,0.10),transparent_60%)]" />
+                <div className="relative flex items-center justify-between gap-4">
+                  <div className="text-sm font-medium text-white/90">
+                    Preview App
                   </div>
-                ))}
-              </div>
-              <div className="hidden md:grid md:grid-cols-2 md:gap-3">
-                {[
-                  
-                  "/screen2.png",
-                  "/screen3.png",
-                  "/screen4.png",
-                  "/screen5.png",
-                  "/screen6.png",
-                  "/screen7.png",
-                  "/screen8.png",
-                  "/screen10.png",
-                ].map((src) => (
-                  <div
-                    key={src}
-                    className="overflow-hidden rounded-2xl border border-white/10 bg-white/5"
+                  <button
+                    type="button"
+                    onClick={() => setAppPreviewOpen(true)}
+                    className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70 hover:bg-white/10"
                   >
-                    <img
-                      src={src}
-                      alt="MOVR screen"
-                      className="h-40 w-full object-cover"
-                    />
+                    See more
+                  </button>
+                </div>
+                <div className="relative mt-3 overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+                  <img
+                    src={appPreviews[0]}
+                    alt="Preview App"
+                    className="h-36 w-full object-cover"
+                  />
+                </div>
+              </div>
+              <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/[0.06] p-4 shadow-[0_20px_60px_rgba(0,0,0,0.45)] backdrop-blur">
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(460px_220px_at_0%_0%,rgba(255,255,255,0.10),transparent_60%)]" />
+                <div className="relative flex items-center justify-between gap-4">
+                  <div className="text-sm font-medium text-white/90">
+                    Preview Webb
                   </div>
-                ))}
+                  <button
+                    type="button"
+                    onClick={() => setWebPreviewOpen(true)}
+                    className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70 hover:bg-white/10"
+                  >
+                    See more
+                  </button>
+                </div>
+                <div className="relative mt-3 overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+                  <img
+                    src={webPreviews[0]}
+                    alt="Preview Webb"
+                    className="h-36 w-full object-cover"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        </motion.div>
+            </div>
+          </motion.div>
 
         {/* CTA (ORÖRD från din kod) */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={typingDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
-          className="mt-7 flex flex-col gap-3 sm:flex-row"
-        >
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={typingDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+            className="mt-4 flex flex-col gap-3 sm:flex-row sm:justify-end"
+          >
           <button
             type="button"
             onClick={() => {
               setPilotSubmitted(false);
               setPilotOpen(true);
             }}
-            className="inline-flex h-12 w-full items-center justify-center rounded-2xl bg-gradient-to-br from-[#16275E] via-[#1E2F78] to-[#3F5DDB] px-5 text-sm font-medium text-white shadow-lg shadow-[#1E2F78]/45 hover:from-[#142255] hover:via-[#1A2A6A] hover:to-[#3550C3] sm:w-auto"
+            className="inline-flex h-12 w-full items-center justify-center rounded-2xl bg-gradient-to-br from-[#241245] via-[#321667] to-[#653ADF] px-5 text-sm font-medium text-white shadow-lg shadow-[#120824]/45 hover:from-[#1D0E38] hover:via-[#2A1357] hover:to-[#5632C1] sm:w-auto"
           >
             Become a pilot customer (for free)
           </button>
@@ -447,7 +436,8 @@ export default function MOVRLanding() {
             Join waitlist
             <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </button>
-        </motion.div>
+          </motion.div>
+        </div>
 
         <div className="mt-16 text-center text-[12px] text-white/38">
           © 2026 MOVR. All rights reserved.
@@ -504,60 +494,85 @@ export default function MOVRLanding() {
         successMessage="Thanks! You're on the waitlist."
         errorMessage={waitlistError}
       />
-      {galleryOpen && (
+      {appPreviewOpen && (
         <div className="fixed inset-0 z-50">
           <div
             className="absolute inset-0 bg-black/55 backdrop-blur-sm"
-            onClick={() => setGalleryOpen(false)}
+            onClick={() => setAppPreviewOpen(false)}
           />
           <div className="relative z-10">
             <button
               type="button"
-              onClick={() => setGalleryOpen(false)}
+              onClick={() => setAppPreviewOpen(false)}
               className="absolute right-4 top-4 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-white/80 hover:bg-white/20"
             >
               Close
             </button>
             <div className="flex h-full w-full items-start pt-0">
               <div className="mx-auto w-full max-w-none px-0 md:px-4">
-                <div className="max-h-[100dvh] space-y-2 overflow-y-auto pb-6 md:hidden">
-                  {[
-                    "/stitch_payment_summary/campaign_management/h1.png",
-                    "/stitch_payment_summary/class_schedule/h2.png",
-                    "/stitch_payment_summary/customer_directory/h3.png",
-                    
-                    "/stitch_payment_summary/financial_kpi_overview/h5.png",
-                    "/stitch_payment_summary/live_insights/h6.png",
-                    "/stitch_payment_summary/membership_&_access/h7.png",
-                    "/stitch_payment_summary/payment_summary/h8.png",
-                    "/stitch_payment_summary/smart_scheduler/h9.png",
-                    "/stitch_payment_summary/staff_timesheets/h10.png",
-                  ].map((src) => (
+                <div className="max-h-[100dvh] space-y-8 overflow-y-auto pb-6 md:hidden">
+                  {appPreviews.map((src) => (
                     <div key={src} className="w-screen overflow-hidden">
                       <img
                         src={src}
-                        alt="MOVR screen"
+                        alt="App mockup"
                         className="h-[100dvh] w-screen object-contain"
                       />
                     </div>
                   ))}
                 </div>
                 <div className="hidden max-h-[92vh] space-y-2 overflow-y-auto pb-6 md:block">
-                  {[
-                    
-                    "/screen2.png",
-                    "/screen3.png",
-                    "/screen4.png",
-                    "/screen5.png",
-                    "/screen6.png",
-                    "/screen7.png",
-                    "/screen8.png",
-                    "/screen10.png",
-                  ].map((src) => (
+                  {appPreviews.map((src) => (
                     <div key={src} className="overflow-hidden md:h-[92vh]">
                       <img
                         src={src}
-                        alt="MOVR screen"
+                        alt="App mockup"
+                        className="h-full w-full object-contain"
+                      />
+                    </div>
+                  ))}
+                </div>
+                <div className="text-center text-xs text-white/50">
+                  Scroll to view more
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {webPreviewOpen && (
+        <div className="fixed inset-0 z-50">
+          <div
+            className="absolute inset-0 bg-black/55 backdrop-blur-sm"
+            onClick={() => setWebPreviewOpen(false)}
+          />
+          <div className="relative z-10">
+            <button
+              type="button"
+              onClick={() => setWebPreviewOpen(false)}
+              className="absolute right-4 top-4 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-white/80 hover:bg-white/20"
+            >
+              Close
+            </button>
+            <div className="flex h-full w-full items-start pt-0">
+              <div className="mx-auto w-full max-w-none px-0 md:px-4">
+                <div className="max-h-[100dvh] space-y-8 overflow-y-auto pb-6 md:hidden">
+                  {webPreviews.map((src) => (
+                    <div key={src} className="w-screen overflow-hidden">
+                      <img
+                        src={src}
+                        alt="Web mockup"
+                        className="h-[100dvh] w-screen object-contain"
+                      />
+                    </div>
+                  ))}
+                </div>
+                <div className="hidden max-h-[92vh] space-y-2 overflow-y-auto pb-6 md:block">
+                  {webPreviews.map((src) => (
+                    <div key={src} className="overflow-hidden md:h-[92vh]">
+                      <img
+                        src={src}
+                        alt="Web mockup"
                         className="h-full w-full object-contain"
                       />
                     </div>
