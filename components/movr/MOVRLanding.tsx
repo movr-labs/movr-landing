@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ManaBackground from "./ManaBackground";
 
 function Modal({
@@ -199,6 +199,7 @@ type ContactPayload = {
 };
 
 export default function MOVRLanding() {
+  const headline = "More time for athletes.\nLess administration.";
   const [pilotOpen, setPilotOpen] = useState(false);
   const [waitlistOpen, setWaitlistOpen] = useState(false);
   const [galleryOpen, setGalleryOpen] = useState(false);
@@ -206,6 +207,25 @@ export default function MOVRLanding() {
   const [waitlistSubmitted, setWaitlistSubmitted] = useState(false);
   const [pilotError, setPilotError] = useState<string | null>(null);
   const [waitlistError, setWaitlistError] = useState<string | null>(null);
+  const [typedText, setTypedText] = useState("");
+  const [typingDone, setTypingDone] = useState(false);
+
+  useEffect(() => {
+    let index = 0;
+    setTypedText("");
+    setTypingDone(false);
+
+    const interval = setInterval(() => {
+      index += 1;
+      setTypedText(headline.slice(0, index));
+      if (index >= headline.length) {
+        clearInterval(interval);
+        setTypingDone(true);
+      }
+    }, 30);
+
+    return () => clearInterval(interval);
+  }, [headline]);
 
   const sendContact = async (payload: ContactPayload) => {
     const res = await fetch("/api/contact", {
@@ -247,28 +267,43 @@ export default function MOVRLanding() {
       <main className="relative z-10 mx-auto max-w-7xl px-5 pb-24 pt-6 md:pt-10">
         {/* Vi tar bort 2-kol layouten här för att inte tvinga korten smalare */}
         <div className="max-w-3xl">
-          <motion.h1
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="text-balance text-[32px] font-semibold tracking-tight sm:text-[38px] md:text-[60px]"
-          >
-            More time for athletes. Less administration.
-          </motion.h1>
+          <div className="flex min-h-[100svh] flex-col justify-center -translate-y-20 md:min-h-0 md:translate-y-0">
+            <motion.h1
+              initial={false}
+              aria-label={headline}
+              className="whitespace-pre-line text-[32px] font-semibold tracking-tight sm:text-[38px] md:text-[60px]"
+            >
+              <span className="relative block">
+                <span className="invisible">{headline}</span>
+                <span className="absolute inset-0">
+                  {typedText}
+                  {!typingDone && (
+                    <span className="ml-1 inline-block h-[1em] w-[1px] bg-white/70 align-middle" />
+                  )}
+                </span>
+              </span>
+            </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, ease: "easeOut", delay: 0.05 }}
-            className="mt-3 text-pretty text-[14px] leading-relaxed text-white/62 md:mt-4 md:text-[15px]"
-          >
-            Everything academys need to reduce admin — built into one system.
-          </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={typingDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+            >
+              <p className="mt-3 text-pretty text-[14px] leading-relaxed text-white/62 md:mt-4 md:text-[15px]">
+                Everything academys need to reduce admin — built into one system.
+              </p>
+            </motion.div>
+          </div>
         </div>
 
         {/* ====== TVÅ LÅDOR BREDVID VARANDRA ======
             VÄNSTERKORTET ÄR EXAKT ORÖRT (copy/paste från din kod) */}
-        <div className="mt-5 flex flex-col gap-4 md:mt-6 md:flex-row md:items-stretch md:gap-6">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={typingDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+          className="mt-2 flex flex-col gap-8 md:mt-6 md:flex-row md:items-stretch md:gap-12"
+        >
           {/* LEFT CARD (ORÖRD) */}
           <div className="relative flex w-full flex-col overflow-hidden rounded-3xl border border-white/15 bg-white/[0.06] p-4 shadow-[0_24px_70px_rgba(0,0,0,0.5)] backdrop-blur md:max-w-xl md:p-5">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(600px_240px_at_0%_0%,rgba(255,255,255,0.12),transparent_60%),radial-gradient(500px_300px_at_100%_20%,rgba(120,200,255,0.10),transparent_60%)]" />
@@ -335,7 +370,7 @@ export default function MOVRLanding() {
                   "/stitch_payment_summary/campaign_management/h1.png",
                   "/stitch_payment_summary/class_schedule/h2.png",
                   "/stitch_payment_summary/customer_directory/h3.png",
-                  "/stitch_payment_summary/customer_profile/h4.png",
+                  
                   "/stitch_payment_summary/financial_kpi_overview/h5.png",
                   "/stitch_payment_summary/live_insights/h6.png",
                   "/stitch_payment_summary/membership_&_access/h7.png",
@@ -381,10 +416,15 @@ export default function MOVRLanding() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* CTA (ORÖRD från din kod) */}
-        <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={typingDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+          className="mt-7 flex flex-col gap-3 sm:flex-row"
+        >
           <button
             type="button"
             onClick={() => {
@@ -407,7 +447,7 @@ export default function MOVRLanding() {
             Join waitlist
             <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </button>
-        </div>
+        </motion.div>
 
         <div className="mt-16 text-center text-[12px] text-white/38">
           © 2026 MOVR. All rights reserved.
@@ -478,14 +518,14 @@ export default function MOVRLanding() {
             >
               Close
             </button>
-            <div className="flex h-full w-full items-start pt-6">
-              <div className="mx-auto w-full max-w-none px-3 sm:px-4 md:px-6">
-                <div className="max-h-[82vh] space-y-6 overflow-y-auto pb-6 md:hidden">
+            <div className="flex h-full w-full items-start pt-0">
+              <div className="mx-auto w-full max-w-none px-0 md:px-4">
+                <div className="max-h-[100dvh] space-y-2 overflow-y-auto pb-6 md:hidden">
                   {[
                     "/stitch_payment_summary/campaign_management/h1.png",
                     "/stitch_payment_summary/class_schedule/h2.png",
                     "/stitch_payment_summary/customer_directory/h3.png",
-                    "/stitch_payment_summary/customer_profile/h4.png",
+                    
                     "/stitch_payment_summary/financial_kpi_overview/h5.png",
                     "/stitch_payment_summary/live_insights/h6.png",
                     "/stitch_payment_summary/membership_&_access/h7.png",
@@ -493,19 +533,16 @@ export default function MOVRLanding() {
                     "/stitch_payment_summary/smart_scheduler/h9.png",
                     "/stitch_payment_summary/staff_timesheets/h10.png",
                   ].map((src) => (
-                    <div
-                      key={src}
-                      className="overflow-hidden rounded-3xl border border-white/10 bg-[#07070B]"
-                    >
+                    <div key={src} className="w-screen overflow-hidden">
                       <img
                         src={src}
                         alt="MOVR screen"
-                        className="h-[60vh] w-full object-contain"
+                        className="h-[100dvh] w-screen object-contain"
                       />
                     </div>
                   ))}
                 </div>
-                <div className="hidden max-h-[92vh] space-y-6 overflow-y-auto pb-6 md:block">
+                <div className="hidden max-h-[92vh] space-y-2 overflow-y-auto pb-6 md:block">
                   {[
                     
                     "/screen2.png",

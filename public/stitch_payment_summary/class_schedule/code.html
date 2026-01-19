@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Class Schedule - Professional Control System</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#42a1ff",
+                        "background-light": "#f9fafb",
+                        "background-dark": "#0f1114",
+                        "card-dark": "#1b1f2a",
+                        "border-dark": "#2a303f",
+                        "accent-warning": "#f59e0b"
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<!-- Sticky Header -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-border-dark">
+<div class="flex items-center p-4 justify-between max-w-md mx-auto">
+<div class="flex items-center gap-3">
+<div class="bg-primary/10 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined block">calendar_today</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight">Class Schedule</h1>
+</div>
+<button class="bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-primary/20 transition-colors">
+                Today
+            </button>
+</div>
+<!-- Horizontal Date Picker -->
+<div class="flex gap-3 px-4 py-4 overflow-x-auto hide-scrollbar max-w-md mx-auto">
+<div class="flex flex-col items-center justify-center min-w-[56px] h-20 rounded-xl bg-primary text-white shadow-lg shadow-primary/20">
+<p class="text-[10px] uppercase font-bold tracking-widest opacity-80">Mon</p>
+<p class="text-lg font-bold">12</p>
+<div class="w-1 h-1 bg-white rounded-full mt-1"></div>
+</div>
+<div class="flex flex-col items-center justify-center min-w-[56px] h-20 rounded-xl bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark">
+<p class="text-[10px] uppercase font-bold tracking-widest text-slate-500">Tue</p>
+<p class="text-lg font-bold">13</p>
+</div>
+<div class="flex flex-col items-center justify-center min-w-[56px] h-20 rounded-xl bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark">
+<p class="text-[10px] uppercase font-bold tracking-widest text-slate-500">Wed</p>
+<p class="text-lg font-bold">14</p>
+</div>
+<div class="flex flex-col items-center justify-center min-w-[56px] h-20 rounded-xl bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark">
+<p class="text-[10px] uppercase font-bold tracking-widest text-slate-500">Thu</p>
+<p class="text-lg font-bold">15</p>
+</div>
+<div class="flex flex-col items-center justify-center min-w-[56px] h-20 rounded-xl bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark">
+<p class="text-[10px] uppercase font-bold tracking-widest text-slate-500">Fri</p>
+<p class="text-lg font-bold">16</p>
+</div>
+<div class="flex flex-col items-center justify-center min-w-[56px] h-20 rounded-xl bg-white dark:bg-card-dark border border-slate-200 dark:border-border-dark">
+<p class="text-[10px] uppercase font-bold tracking-widest text-slate-500">Sat</p>
+<p class="text-lg font-bold">17</p>
+</div>
+</div>
+</header>
+<main class="max-w-md mx-auto px-4 pb-24">
+<h3 class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-[0.2em] pt-6 pb-4">Monday, Oct 12</h3>
+<!-- List Items (Bento Style) -->
+<div class="space-y-4">
+<!-- Item 1 -->
+<div class="bg-white dark:bg-card-dark p-4 rounded-xl border border-slate-200 dark:border-border-dark flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="flex items-center justify-center rounded-lg bg-slate-100 dark:bg-border-dark size-10 text-primary">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<div>
+<p class="text-white text-base font-bold leading-tight">Advanced Management</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs mt-1">09:00 - 10:30 • John Doe</p>
+</div>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white text-xs font-bold py-2 px-6 rounded-lg transition-all active:scale-95">
+                        Book
+                    </button>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between items-center text-[10px] font-bold uppercase tracking-wider text-slate-400">
+<span>Capacity</span>
+<span class="text-slate-200">12 / 15</span>
+</div>
+<div class="h-1.5 w-full bg-slate-100 dark:bg-border-dark rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 80%;"></div>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-white dark:bg-card-dark p-4 rounded-xl border border-slate-200 dark:border-border-dark flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="flex items-center justify-center rounded-lg bg-slate-100 dark:bg-border-dark size-10 text-primary">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<div>
+<p class="text-white text-base font-bold leading-tight">Strategy Workshop</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs mt-1">11:00 - 12:00 • Room A</p>
+</div>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white text-xs font-bold py-2 px-6 rounded-lg transition-all active:scale-95">
+                        Book
+                    </button>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between items-center text-[10px] font-bold uppercase tracking-wider text-slate-400">
+<span>Capacity</span>
+<span class="text-slate-200">8 / 20</span>
+</div>
+<div class="h-1.5 w-full bg-slate-100 dark:bg-border-dark rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 40%;"></div>
+</div>
+</div>
+</div>
+<!-- Item 3: Low Capacity Warning -->
+<div class="bg-white dark:bg-card-dark p-4 rounded-xl border border-slate-200 dark:border-border-dark flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="flex items-center justify-center rounded-lg bg-slate-100 dark:bg-border-dark size-10 text-primary">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div>
+<p class="text-white text-base font-bold leading-tight">Financial Planning</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs mt-1">14:00 - 15:30 • Sarah Smith</p>
+</div>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white text-xs font-bold py-2 px-6 rounded-lg transition-all active:scale-95">
+                        Book
+                    </button>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between items-center text-[10px] font-bold uppercase tracking-wider text-accent-warning">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">warning</span> Almost Full</span>
+<span>19 / 20</span>
+</div>
+<div class="h-1.5 w-full bg-slate-100 dark:bg-border-dark rounded-full overflow-hidden">
+<div class="h-full bg-accent-warning rounded-full" style="width: 95%;"></div>
+</div>
+</div>
+</div>
+<!-- Item 4: Waitlist State -->
+<div class="bg-white dark:bg-card-dark p-4 rounded-xl border border-slate-200 dark:border-border-dark opacity-80 flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="flex items-center justify-center rounded-lg bg-slate-100 dark:bg-border-dark size-10 text-slate-500">
+<span class="material-symbols-outlined">group</span>
+</div>
+<div>
+<p class="text-white text-base font-bold leading-tight">Leadership Sync</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs mt-1">16:00 - 17:00 • Boardroom</p>
+</div>
+</div>
+<button class="bg-slate-200 dark:bg-border-dark text-slate-900 dark:text-white text-xs font-bold py-2 px-4 rounded-lg transition-all">
+                        Waitlist
+                    </button>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between items-center text-[10px] font-bold uppercase tracking-wider text-slate-500">
+<span>Fully Booked</span>
+<span>10 / 10</span>
+</div>
+<div class="h-1.5 w-full bg-slate-100 dark:bg-border-dark rounded-full overflow-hidden">
+<div class="h-full bg-slate-500 rounded-full" style="width: 100%;"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- iOS Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-xl border-t border-slate-200 dark:border-border-dark pb-8 pt-2">
+<div class="max-w-md mx-auto flex justify-around items-center">
+<div class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[24px]">event_note</span>
+<span class="text-[10px] font-medium">Schedule</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-[24px]">explore</span>
+<span class="text-[10px] font-medium">Discover</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-[24px]">notifications</span>
+<span class="text-[10px] font-medium">Alerts</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-[24px]">person_outline</span>
+<span class="text-[10px] font-medium">Profile</span>
+</div>
+</div>
+</nav>
+</body></html>

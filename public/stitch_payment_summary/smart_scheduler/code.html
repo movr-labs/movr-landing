@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Scheduler - AI Generation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#42a1ff",
+                        "background-light": "#f9fafb",
+                        "background-dark": "#0f1114",
+                        "surface-dark": "#1b1f26",
+                        "border-dark": "#2a303f",
+                        "danger-soft": "#ef4444",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-30 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-border-dark">
+<div class="flex items-center justify-between p-4 max-w-md mx-auto w-full">
+<div class="flex items-center gap-3">
+<div class="bg-primary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+</div>
+<div>
+<h1 class="text-lg font-bold leading-tight">Smart Scheduler</h1>
+<p class="text-xs text-slate-500 dark:text-slate-400">AI-Generated Proposal</p>
+</div>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-surface-dark text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined">refresh</span>
+</button>
+</div>
+</header>
+<main class="flex-1 max-w-md mx-auto w-full pb-32">
+<!-- Bento Stats Section -->
+<section class="p-4 grid grid-cols-3 gap-3">
+<div class="col-span-1 bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark p-4 rounded-xl flex flex-col justify-between aspect-square">
+<span class="material-symbols-outlined text-primary text-xl">analytics</span>
+<div>
+<p class="text-[10px] uppercase tracking-wider font-semibold text-slate-400">Coverage</p>
+<p class="text-xl font-bold">94%</p>
+<p class="text-[10px] text-emerald-500 font-medium">+2.1%</p>
+</div>
+</div>
+<div class="col-span-1 bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark p-4 rounded-xl flex flex-col justify-between aspect-square border-l-4 border-l-danger-soft">
+<span class="material-symbols-outlined text-danger-soft text-xl">warning</span>
+<div>
+<p class="text-[10px] uppercase tracking-wider font-semibold text-slate-400">Conflicts</p>
+<p class="text-xl font-bold">2</p>
+<p class="text-[10px] text-danger-soft font-medium">Action Req.</p>
+</div>
+</div>
+<div class="col-span-1 bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark p-4 rounded-xl flex flex-col justify-between aspect-square">
+<span class="material-symbols-outlined text-slate-400 text-xl">payments</span>
+<div>
+<p class="text-[10px] uppercase tracking-wider font-semibold text-slate-400">Labor Cost</p>
+<p class="text-xl font-bold">4.2k</p>
+<p class="text-[10px] text-slate-500 font-medium">Forecast</p>
+</div>
+</div>
+</section>
+<!-- Alert Panel -->
+<section class="px-4 pb-4">
+<div class="flex items-center justify-between p-4 rounded-xl border border-danger-soft/30 bg-danger-soft/10 group">
+<div class="flex flex-col gap-0.5">
+<p class="text-danger-soft text-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">error</span>
+                        Conflict Detected
+                    </p>
+<p class="text-slate-600 dark:text-slate-400 text-xs">Overlapping shifts in Kitchen Staff (Mon/Wed).</p>
+</div>
+<a class="text-xs font-bold bg-danger-soft text-white px-3 py-1.5 rounded-full transition-transform active:scale-95" href="#">
+                    Resolve
+                </a>
+</div>
+</section>
+<!-- Date Tabs -->
+<section class="px-4">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-sm font-bold uppercase tracking-widest text-slate-500">Weekly View</h2>
+<p class="text-xs font-medium text-slate-400">Oct 12 - Oct 18</p>
+</div>
+<div class="flex overflow-x-auto hide-scrollbar gap-2 mb-6">
+<button class="flex-shrink-0 min-w-[56px] py-3 rounded-xl border-2 border-primary bg-primary/10 flex flex-col items-center">
+<span class="text-[10px] font-bold text-primary uppercase">Mon</span>
+<span class="text-base font-black text-slate-900 dark:text-white">12</span>
+</button>
+<button class="flex-shrink-0 min-w-[56px] py-3 rounded-xl border border-slate-200 dark:border-border-dark flex flex-col items-center opacity-60">
+<span class="text-[10px] font-bold uppercase">Tue</span>
+<span class="text-base font-black">13</span>
+</button>
+<button class="flex-shrink-0 min-w-[56px] py-3 rounded-xl border border-slate-200 dark:border-border-dark flex flex-col items-center opacity-60">
+<span class="text-[10px] font-bold uppercase">Wed</span>
+<span class="text-base font-black">14</span>
+</button>
+<button class="flex-shrink-0 min-w-[56px] py-3 rounded-xl border border-slate-200 dark:border-border-dark flex flex-col items-center opacity-60">
+<span class="text-[10px] font-bold uppercase">Thu</span>
+<span class="text-base font-black">15</span>
+</button>
+<button class="flex-shrink-0 min-w-[56px] py-3 rounded-xl border border-slate-200 dark:border-border-dark flex flex-col items-center opacity-60">
+<span class="text-[10px] font-bold uppercase">Fri</span>
+<span class="text-base font-black">16</span>
+</button>
+</div>
+</section>
+<!-- Timeline Grid -->
+<section class="px-4">
+<div class="bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark rounded-xl overflow-hidden">
+<div class="p-4 border-b border-slate-200 dark:border-border-dark flex items-center justify-between bg-slate-50 dark:bg-slate-800/50">
+<span class="text-xs font-bold text-slate-500">Staff Member</span>
+<span class="text-xs font-bold text-slate-500">Shift (08:00 - 20:00)</span>
+</div>
+<!-- Row 1 -->
+<div class="p-4 border-b border-slate-100 dark:border-border-dark/50 flex flex-col gap-3">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full border border-slate-200 dark:border-border-dark" data-alt="Professional headshot of Sarah J." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAc2yk__oNIkKMKh90QZXGK8y2KzEpclq-McLDXs9FBCn5JEiwJkfLZnrXCQgVureZTnPBwcmoRdlJncMycjbddZaC7FN14dfggXmusU7OURBzqtPZY1l4qSgRf-ERztx-WwI27liN8dDq7VQhPZDYtLfQ9hTpLVEikmofaPBj1eMwAO68_b45hb9bSLk8m8_EjCi4l70GgIhq5g1OIZWLw7SyA6n2iD5hddksTJWtMhp3FGHrCMVt1Euqm_Hhe6yTtShlkl88orwA"/>
+<div>
+<p class="text-sm font-bold">Sarah Jenkins</p>
+<p class="text-[10px] text-slate-500 font-medium">Head Chef</p>
+</div>
+</div>
+<div class="relative w-full h-8 bg-slate-100 dark:bg-background-dark/50 rounded-lg overflow-hidden">
+<div class="absolute left-[10%] w-[60%] h-full bg-primary/20 border-l-2 border-r-2 border-primary flex items-center px-3">
+<span class="text-[10px] font-bold text-primary">09:00 - 17:00</span>
+</div>
+</div>
+</div>
+<!-- Row 2 (Conflict) -->
+<div class="p-4 border-b border-slate-100 dark:border-border-dark/50 flex flex-col gap-3">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full border border-slate-200 dark:border-border-dark" data-alt="Professional headshot of Marcus T." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsWA3HZmWqtYVhCcVKmWADCxDwYFOTKmzXjMPzx0AFTtNi5SgxyTVDe_W4h2ajwL6LRAO0vVaLcI8-NlebD8Q3x0NV9Vdvzhp3Acqkjt7yHXftN94uRzPq56Y2N6WpbOG1CbM9u-Uu12oXe72ynnvl8xpqMg4C_oMFX9AlcWcL1IT7AyEXzsaJraz2SD0_nXvgs7w__TXzk5SwJeruADswLJas-VaK1JLRfvI5iF49-fBBPzieaLkxqZ4Z3yQClvM2UngMefImcM0"/>
+<div>
+<p class="text-sm font-bold">Marcus Thorne</p>
+<p class="text-[10px] text-slate-500 font-medium">Sous Chef</p>
+</div>
+</div>
+<div class="relative w-full h-8 bg-slate-100 dark:bg-background-dark/50 rounded-lg overflow-hidden">
+<div class="absolute left-[30%] w-[55%] h-full bg-danger-soft/20 border-l-2 border-r-2 border-danger-soft flex items-center px-3 ring-1 ring-inset ring-danger-soft/30">
+<span class="text-[10px] font-bold text-danger-soft">11:00 - 19:00 (Conflict)</span>
+</div>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="p-4 border-b border-slate-100 dark:border-border-dark/50 flex flex-col gap-3">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full border border-slate-200 dark:border-border-dark" data-alt="Professional headshot of Elena R." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTvij4a9TiYFbnh4Dj8TyQUqxLG_k2gOrVU6gklESxVihFCSW8-5JXsI3mF6rvM1Bvc7Ugl5-xdk68AOxQpFQxdB8pEJeYQpCkaoO3dqro7aHTOa6eKvdRlUztbVVc9avt7H0Wi7e5huKU9c7qrwtV-3xxMh1Y_gv25fi5_ESdAhwsSWUV4Ymynvv6L7kPcavfdyVcWPXlsaQ_yu8OplCd1Y4JcWbHObePzeB5kttte-sQe_TDv2d-K9z_FgNQwU7T3do3tQzA_ds"/>
+<div>
+<p class="text-sm font-bold">Elena Rodriguez</p>
+<p class="text-[10px] text-slate-500 font-medium">Operations</p>
+</div>
+</div>
+<div class="relative w-full h-8 bg-slate-100 dark:bg-background-dark/50 rounded-lg overflow-hidden">
+<div class="absolute left-[5%] w-[45%] h-full bg-slate-200 dark:bg-slate-700/50 border-l-2 border-r-2 border-slate-400 flex items-center px-3">
+<span class="text-[10px] font-bold text-slate-500">08:30 - 15:30</span>
+</div>
+</div>
+</div>
+<!-- Row 4 -->
+<div class="p-4 flex flex-col gap-3">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full border border-slate-200 dark:border-border-dark" data-alt="Professional headshot of David K." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfFwmDwSkJbvJlyV9KgN5lT86AB3lsPm_oiL0J1PbTRKeg7q0keToY-jItEL3cDoBR0asHklWS1Wx4B3w4YNRRrI_57f4rNl2JQziOaS633ROQ8AjGmWDM6loTxpz4sSo-3YRKaei-OcAThz0gxyAxwoV9tec1s1mGYiZij0OWW48_redekObtHkzI1VJIBblcf41423fgAdCZmv_lwt8H1ciuDGyR-zgnt44WmlgOb4-ifhE_L02aIsaitG33eFuRqE13lIPnQuA"/>
+<div>
+<p class="text-sm font-bold">David Kim</p>
+<p class="text-[10px] text-slate-500 font-medium">Prep Lead</p>
+</div>
+</div>
+<div class="relative w-full h-8 bg-slate-100 dark:bg-background-dark/50 rounded-lg overflow-hidden">
+<div class="absolute left-[50%] w-[40%] h-full bg-primary/20 border-l-2 border-r-2 border-primary flex items-center px-3">
+<span class="text-[10px] font-bold text-primary">13:00 - 20:00</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Action Bar & Navigation -->
+<footer class="fixed bottom-0 left-0 right-0 z-40 max-w-md mx-auto w-full bg-white/90 dark:bg-background-dark/90 backdrop-blur-xl border-t border-slate-200 dark:border-border-dark pb-safe">
+<!-- Floating Primary Action -->
+<div class="px-4 py-4 flex gap-3">
+<button class="flex-1 bg-slate-100 dark:bg-surface-dark text-slate-700 dark:text-slate-300 py-4 rounded-xl font-bold text-sm transition-transform active:scale-95">
+                Manual Edit
+            </button>
+<button class="flex-[2] bg-primary text-white py-4 rounded-xl font-bold text-sm shadow-lg shadow-primary/25 transition-transform active:scale-95 flex items-center justify-center gap-2">
+<span>Approve &amp; Publish</span>
+<span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+<!-- System Navigation -->
+<nav class="flex justify-around items-center px-6 py-3">
+<a class="flex flex-col items-center text-slate-400" href="#">
+<span class="material-symbols-outlined text-2xl">grid_view</span>
+</a>
+<a class="flex flex-col items-center text-primary" href="#">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+</a>
+<a class="flex flex-col items-center text-slate-400" href="#">
+<span class="material-symbols-outlined text-2xl">group</span>
+</a>
+<a class="flex flex-col items-center text-slate-400" href="#">
+<span class="material-symbols-outlined text-2xl">settings</span>
+</a>
+</nav>
+</footer>
+</body></html>

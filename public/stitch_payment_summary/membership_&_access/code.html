@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Membership &amp; Access</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#42a1ff",
+                        "background-light": "#f9fafb",
+                        "background-dark": "#0f1114",
+                        "card-dark": "#1b1f2a",
+                        "border-dark": "#2a303f",
+                        "success": "#34d399"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .qr-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
+        }
+        .glass-effect {
+            backdrop-filter: blur(12px);
+            background: rgba(27, 31, 42, 0.8);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen font-display">
+<div class="max-w-md mx-auto min-h-screen flex flex-col pb-24">
+<!-- Header -->
+<header class="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-2xl">arrow_back_ios_new</span>
+</button>
+<h1 class="text-lg font-bold tracking-tight">Membership &amp; Access</h1>
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-2xl">more_horiz</span>
+</button>
+</header>
+<main class="flex-1 px-4 space-y-6">
+<!-- Hero Digital Card -->
+<div class="relative group">
+<div class="absolute -inset-0.5 bg-primary/20 rounded-[2rem] blur opacity-30 group-hover:opacity-50 transition duration-1000"></div>
+<div class="relative bg-white dark:bg-card-dark rounded-[2rem] p-6 shadow-2xl border border-slate-200 dark:border-border-dark overflow-hidden">
+<!-- Card Header -->
+<div class="flex justify-between items-start mb-8">
+<div class="flex gap-4">
+<div class="size-14 rounded-2xl bg-slate-100 dark:bg-slate-800 overflow-hidden ring-2 ring-primary/20">
+<img alt="Member profile portrait" class="w-full h-full object-cover" data-alt="Professional headshot of a gym member" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLZwKkjPljh0N5f7_l22dOv7LwpM-OLhx7fbTcS2Y3WqyXdT-uYU5hpxm7eRVq-m1LXegHf3H6OkemaTweYqiLx_a0ke7pvpnapViyfk_napsYAWshX8tzxe9lmAqhbI67URWoC5CTwVmZOwEJj3UQj6eEtKwG8-nTXPXy0iw3Ya4N-ZBoaO2HV0qZNXIwmeNv9Ve-BQO0xv5eFUsVAd8grlEOLPZUhebzN8NQVii1VJXHXtKL-eMdSourOQ5INdtaF95oBKxWNis"/>
+</div>
+<div>
+<h3 class="text-xl font-bold dark:text-white">Alex Sterling</h3>
+<div class="flex items-center gap-1.5 mt-1">
+<span class="size-2 rounded-full bg-success animate-pulse"></span>
+<span class="text-xs font-semibold text-success uppercase tracking-wider">Active Status</span>
+</div>
+</div>
+</div>
+<div class="bg-primary/10 dark:bg-primary/20 px-3 py-1.5 rounded-full">
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest leading-none">Platinum</span>
+</div>
+</div>
+<!-- QR Code Section -->
+<div class="flex flex-col items-center justify-center py-4 space-y-4">
+<div class="p-4 bg-white rounded-3xl shadow-inner qr-gradient">
+<div class="size-48 bg-slate-100 rounded-xl overflow-hidden flex items-center justify-center relative">
+<!-- Simulated QR Code Pattern -->
+<img alt="Digital membership QR code" class="w-full h-full mix-blend-multiply opacity-90" data-alt="Modern geometric QR code for building access" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1T9dGu4hSLzKsNo4GS_ramQhjQonh4GCr1T2UTtyAhS4kPn8xJEsApve2TAG5JZSjXhQWrlSyQJMSP3MrM6-ChxnLS035vWDyixkyGo8db90s6-xru4i2jOtTJae2EpLgswMyyqpu3J3JdOG2eDgQ84DEg8vdmr3BbPpNKOOZ_QDH5CT8fkDS2y8qfPO_nKbl8NJNqoPssOkbmw8xKlIbYVGwWNGVNglkw_B7xe7V8gDkbMVGcn9MrzNg-V8CQx7LHcuBE-PbOSw"/>
+</div>
+</div>
+<div class="text-center">
+<p class="text-xs font-medium text-slate-400 dark:text-slate-500 tracking-widest uppercase">Member ID: 882910</p>
+<p class="text-[10px] text-slate-400 dark:text-slate-600 mt-1">Refreshes in 45s</p>
+</div>
+</div>
+<!-- Quick Actions -->
+<div class="grid grid-cols-2 gap-3 mt-8">
+<button class="flex items-center justify-center gap-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 h-12 rounded-xl font-bold text-sm transition-transform active:scale-95">
+<span class="material-symbols-outlined text-xl">wallet</span>
+                            Add to Wallet
+                        </button>
+<button class="flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white h-12 rounded-xl font-bold text-sm transition-transform active:scale-95 border border-slate-200 dark:border-border-dark">
+<span class="material-symbols-outlined text-xl">share</span>
+                            Guest Pass
+                        </button>
+</div>
+</div>
+</div>
+<!-- Recent Access Section -->
+<div class="space-y-4">
+<div class="flex items-center justify-between px-2">
+<h2 class="text-lg font-bold tracking-tight">Recent Access</h2>
+<button class="text-primary text-sm font-semibold hover:underline">View History</button>
+</div>
+<div class="space-y-3">
+<!-- Access Item 1 -->
+<div class="flex items-center gap-4 bg-white dark:bg-card-dark p-4 rounded-2xl border border-slate-200 dark:border-border-dark">
+<div class="size-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">door_front</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-sm">Main Entrance</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">Gym Floor • Today</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold">08:42 AM</p>
+<span class="text-[10px] text-success font-bold uppercase">Success</span>
+</div>
+</div>
+<!-- Access Item 2 -->
+<div class="flex items-center gap-4 bg-white dark:bg-card-dark p-4 rounded-2xl border border-slate-200 dark:border-border-dark">
+<div class="size-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">hotel_class</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-sm">VIP Lounge</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">Level 2 • Today</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold">09:15 AM</p>
+<span class="text-[10px] text-success font-bold uppercase">Success</span>
+</div>
+</div>
+<!-- Access Item 3 -->
+<div class="flex items-center gap-4 bg-white dark:bg-card-dark p-4 rounded-2xl border border-slate-200 dark:border-border-dark opacity-80">
+<div class="size-12 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500">
+<span class="material-symbols-outlined">fitness_center</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-sm">Equipment Room B</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">Basement • Yesterday</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold">06:20 PM</p>
+<span class="text-[10px] text-slate-400 font-bold uppercase">Logged</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Billing Info Card (Contextual) -->
+<div class="bg-primary/5 border border-primary/20 rounded-2xl p-4 flex items-center gap-4">
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-lg">calendar_month</span>
+</div>
+<div class="flex-1">
+<p class="text-xs text-slate-500 dark:text-slate-400">Next renewal date</p>
+<p class="text-sm font-bold">October 24, 2024</p>
+</div>
+<button class="bg-primary text-white text-[10px] font-bold px-3 py-1.5 rounded-lg uppercase tracking-wider">
+                    Manage
+                </button>
+</div>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white/80 dark:bg-background-dark/80 backdrop-blur-xl border-t border-slate-200 dark:border-border-dark px-6 py-3 pb-8 z-50">
+<div class="max-w-md mx-auto flex items-center justify-between">
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="text-[10px] font-medium">Dashboard</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined font-variation-fill">contactless</span>
+<span class="text-[10px] font-medium">Access</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">event_note</span>
+<span class="text-[10px] font-medium">Bookings</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-medium">Settings</span>
+</button>
+</div>
+</nav>
+</div>
+<!-- Custom Cursor Glow (Visual Only) -->
+<div class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-20 overflow-hidden">
+<div class="absolute -top-1/4 -right-1/4 size-[500px] bg-primary/20 rounded-full blur-[100px]"></div>
+<div class="absolute -bottom-1/4 -left-1/4 size-[500px] bg-primary/10 rounded-full blur-[100px]"></div>
+</div>
+</body></html>

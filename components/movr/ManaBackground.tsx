@@ -62,21 +62,6 @@ export default function ManaBackground({
         }}
       />
 
-      <div
-        className="absolute inset-0"
-        style={{
-          maskImage:
-            "radial-gradient(70% 60% at 50% 25%, black 0%, transparent 70%)",
-          WebkitMaskImage:
-            "radial-gradient(70% 60% at 50% 25%, black 0%, transparent 70%)",
-        }}
-      >
-        <Pane left="6%" width="180px" delay={0} opacity={0.10} />
-        <Pane left="22%" width="220px" delay={1.2} opacity={0.11} />
-        <Pane left="41%" width="260px" delay={0.6} opacity={0.12} />
-        <Pane left="63%" width="210px" delay={1.8} opacity={0.10} />
-        <Pane left="79%" width="190px" delay={0.9} opacity={0.09} />
-      </div>
 
       <div
         className="absolute inset-0 opacity-[0.09]"
