@@ -47,7 +47,7 @@ export default function ManaBackground({
   accent2?: string;
 }) {
   return (
-    <div className="absolute inset-0 overflow-hidden">
+    <div className="fixed inset-0 overflow-hidden">
       <div className="absolute inset-0 bg-[#07070B]" />
 
       <div

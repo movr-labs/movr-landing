@@ -279,10 +279,15 @@ export default function MOVRLanding() {
     "/stitch_payment_summary/staff_timesheets/h10.png",
   ];
   const webPreviews = [
+    "/screen.png",
+    "/screen2.png",
+    "/screen3.png",
+    "/screen4.png",
+    "/screen5.png",
     "/screen6.png",
     "/screen7.png",
     "/screen8.png",
-    "/screen10.png",
+    
   ];
 
   return (
@@ -307,10 +312,10 @@ export default function MOVRLanding() {
       </div>
 
       {/* Hero */}
-      <main className="relative z-10 mx-auto max-w-7xl px-5 pb-24 pt-10 md:pt-14">
+      <main className="relative z-10 mx-auto max-w-7xl px-5 pb-24 pt-6 md:pt-14">
         {/* Vi tar bort 2-kol layouten här för att inte tvinga korten smalare */}
         <div className="max-w-3xl">
-          <div className="flex min-h-[100svh] flex-col justify-center -translate-y-20 md:min-h-0 md:translate-y-15">
+          <div className="flex min-h-0 flex-col justify-start pt-4 md:min-h-0 md:translate-y-15">
             <motion.h1
               initial={false}
               aria-label={headline}
@@ -342,7 +347,7 @@ export default function MOVRLanding() {
             initial={{ opacity: 0, y: 12 }}
             animate={typingDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-            className="mt-0 flex flex-col gap-8 md:mt-4 md:flex-row md:items-stretch md:gap-12"
+            className="mt-6 flex flex-col gap-8 md:mt-4 md:flex-row md:items-stretch md:gap-12"
           >
             <div className="flex w-full flex-col gap-5">
             {/* LEFT CARD */}
@@ -525,9 +530,9 @@ export default function MOVRLanding() {
             </button>
             <div className="flex h-full w-full items-start pt-0">
               <div className="mx-auto w-full max-w-none px-0 md:px-4">
-                <div className="max-h-[100dvh] space-y-8 overflow-y-auto pb-6 md:hidden">
+                <div className="flex max-h-[100dvh] w-full gap-6 overflow-x-auto pb-6 md:hidden">
                   {appPreviews.map((src) => (
-                    <div key={src} className="flex flex-col items-center w-full">
+                    <div key={src} className="w-screen overflow-hidden">
                       <img
                         src={src}
                         alt="App mockup"
@@ -536,13 +541,13 @@ export default function MOVRLanding() {
                     </div>
                   ))}
                 </div>
-                <div className="hidden max-h-[92vh] space-y-12 overflow-y-auto pb-12 md:block">
+                <div className="hidden max-h-[92vh] space-y-2 overflow-y-auto pb-6 md:block">
                   {appPreviews.map((src) => (
-                    <div key={src} className="flex justify-center w-full">
+                    <div key={src} className="overflow-hidden md:h-[92vh]">
                       <img
                         src={src}
                         alt="App mockup"
-                        className="w-[400px] h-auto"
+                        className="h-full w-full object-contain"
                       />
                     </div>
                   ))}
@@ -571,9 +576,12 @@ export default function MOVRLanding() {
             </button>
             <div className="flex h-full w-full items-start pt-0">
               <div className="mx-auto w-full max-w-none px-0 md:px-4">
-                <div className="max-h-[100dvh] space-y-8 overflow-y-auto pb-6 md:hidden">
+                <div className="flex max-h-[100dvh] w-full gap-6 overflow-x-auto pb-6 md:hidden">
                   {webPreviews.map((src) => (
-                    <div key={src} className="w-screen overflow-hidden">
+                    <div
+                      key={src}
+                      className="flex w-screen flex-shrink-0 items-center justify-center overflow-hidden"
+                    >
                       <img
                         src={src}
                         alt="Web mockup"
@@ -582,13 +590,16 @@ export default function MOVRLanding() {
                     </div>
                   ))}
                 </div>
-                <div className="hidden max-h-[92vh] space-y-2 overflow-y-auto pb-6 md:block">
+                <div className="hidden max-h-[92vh] w-full gap-6 overflow-x-auto pb-6 md:flex">
                   {webPreviews.map((src) => (
-                    <div key={src} className="overflow-hidden md:h-[92vh]">
+                    <div
+                      key={src}
+                      className="flex h-[92vh] w-screen flex-shrink-0 items-center justify-center overflow-hidden"
+                    >
                       <img
                         src={src}
                         alt="Web mockup"
-                        className="h-full w-full object-contain"
+                        className="h-full w-[80vw] object-contain"
                       />
                     </div>
                   ))}
