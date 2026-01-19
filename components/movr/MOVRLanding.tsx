@@ -530,24 +530,30 @@ export default function MOVRLanding() {
             </button>
             <div className="flex h-full w-full items-start pt-0">
               <div className="mx-auto w-full max-w-none px-0 md:px-4">
-                <div className="flex max-h-[100dvh] w-full gap-6 overflow-x-auto pb-6 md:hidden">
+                <div className="flex max-h-[100dvh] w-full gap-6 overflow-x-auto overflow-y-hidden pb-6 pt-1 md:hidden">
                   {appPreviews.map((src) => (
-                    <div key={src} className="w-screen overflow-hidden">
+                    <div
+                      key={src}
+                      className="flex w-screen flex-shrink-0 items-center justify-center overflow-hidden"
+                    >
                       <img
                         src={src}
                         alt="App mockup"
-                        className="w-full max-w-[90%] h-auto object-top"
+                        className="h-[100dvh] w-screen object-contain"
                       />
                     </div>
                   ))}
                 </div>
-                <div className="hidden max-h-[92vh] space-y-2 overflow-y-auto pb-6 md:block">
+                <div className="hidden max-h-[92vh] w-full gap-6 overflow-x-auto overflow-y-hidden pb-6 pt-1 md:flex">
                   {appPreviews.map((src) => (
-                    <div key={src} className="overflow-hidden md:h-[92vh]">
+                    <div
+                      key={src}
+                      className="flex h-[92vh] w-screen flex-shrink-0 items-center justify-center overflow-hidden"
+                    >
                       <img
                         src={src}
                         alt="App mockup"
-                        className="h-full w-full object-contain"
+                        className="h-full w-[80vw] object-contain"
                       />
                     </div>
                   ))}
@@ -576,7 +582,7 @@ export default function MOVRLanding() {
             </button>
             <div className="flex h-full w-full items-start pt-0">
               <div className="mx-auto w-full max-w-none px-0 md:px-4">
-                <div className="flex max-h-[100dvh] w-full gap-6 overflow-x-auto pb-6 md:hidden">
+                <div className="flex max-h-[100dvh] w-full gap-6 overflow-x-auto overflow-y-hidden pb-6 pt-1 md:hidden">
                   {webPreviews.map((src) => (
                     <div
                       key={src}
@@ -590,7 +596,7 @@ export default function MOVRLanding() {
                     </div>
                   ))}
                 </div>
-                <div className="hidden max-h-[92vh] w-full gap-6 overflow-x-auto pb-6 md:flex">
+                <div className="hidden max-h-[92vh] w-full gap-6 overflow-x-auto overflow-y-hidden pb-6 pt-1 md:flex">
                   {webPreviews.map((src) => (
                     <div
                       key={src}
