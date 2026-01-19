@@ -329,8 +329,33 @@ export default function MOVRLanding() {
             </div>
 
             {/* Detta gör att kortets höjd inte “drar iväg”. Innehållet scrollar vid behov. */}
-            <div className="relative mt-3 max-h-[180px] overflow-y-hidden md:max-h-[260px] md:overflow-y-auto md:pr-1">
-              <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto md:grid md:grid-cols-2 md:gap-3 md:overflow-visible md:snap-none">
+            <div className="relative mt-3 max-h-[260px] overflow-y-auto pr-1">
+              <div className="grid gap-3 md:hidden">
+                {[
+                  "/stitch_payment_summary/campaign_management/h1.png",
+                  "/stitch_payment_summary/class_schedule/h2.png",
+                  "/stitch_payment_summary/customer_directory/h3.png",
+                  "/stitch_payment_summary/customer_profile/h4.png",
+                  "/stitch_payment_summary/financial_kpi_overview/h5.png",
+                  "/stitch_payment_summary/live_insights/h6.png",
+                  "/stitch_payment_summary/membership_&_access/h7.png",
+                  "/stitch_payment_summary/payment_summary/h8.png",
+                  "/stitch_payment_summary/smart_scheduler/h9.png",
+                  "/stitch_payment_summary/staff_timesheets/h10.png",
+                ].map((src) => (
+                  <div
+                    key={src}
+                    className="overflow-hidden rounded-2xl border border-white/10 bg-white/5"
+                  >
+                    <img
+                      src={src}
+                      alt="MOVR screen"
+                      className="h-36 w-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="hidden md:grid md:grid-cols-2 md:gap-3">
                 {[
                   
                   "/screen2.png",
@@ -344,12 +369,12 @@ export default function MOVRLanding() {
                 ].map((src) => (
                   <div
                     key={src}
-                    className="min-w-[60%] snap-center overflow-hidden rounded-2xl border border-white/10 bg-white/5 md:min-w-0"
+                    className="overflow-hidden rounded-2xl border border-white/10 bg-white/5"
                   >
                     <img
                       src={src}
                       alt="MOVR screen"
-                      className="h-24 w-full object-cover sm:h-28 md:h-32"
+                      className="h-40 w-full object-cover"
                     />
                   </div>
                 ))}
@@ -453,35 +478,56 @@ export default function MOVRLanding() {
             >
               Close
             </button>
-            <div className="flex h-full w-full items-start pt-8">
-              <div className="mx-auto w-full max-w-6xl px-5">
-                <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-6">
-                {[
-                  "/screen2.png",
-                
-                  
-                  "/screen3.png",
-                  "/screen4.png",
-                  "/screen5.png",
-                  "/screen6.png",
-                  "/screen7.png",
-                  "/screen8.png",
-                  "/screen10.png",
-                ].map((src) => (
-                  <div
-                    key={src}
-                    className="w-full min-w-full snap-center overflow-hidden rounded-3xl border border-white/10 bg-[#07070B]"
-                  >
-                    <img
-                      src={src}
-                      alt="MOVR screen"
-                      className="h-[92vh] w-full object-contain"
-                    />
-                  </div>
-                ))}
+            <div className="flex h-full w-full items-start pt-6">
+              <div className="mx-auto w-full max-w-none px-3 sm:px-4 md:px-6">
+                <div className="max-h-[82vh] space-y-6 overflow-y-auto pb-6 md:hidden">
+                  {[
+                    "/stitch_payment_summary/campaign_management/h1.png",
+                    "/stitch_payment_summary/class_schedule/h2.png",
+                    "/stitch_payment_summary/customer_directory/h3.png",
+                    "/stitch_payment_summary/customer_profile/h4.png",
+                    "/stitch_payment_summary/financial_kpi_overview/h5.png",
+                    "/stitch_payment_summary/live_insights/h6.png",
+                    "/stitch_payment_summary/membership_&_access/h7.png",
+                    "/stitch_payment_summary/payment_summary/h8.png",
+                    "/stitch_payment_summary/smart_scheduler/h9.png",
+                    "/stitch_payment_summary/staff_timesheets/h10.png",
+                  ].map((src) => (
+                    <div
+                      key={src}
+                      className="overflow-hidden rounded-3xl border border-white/10 bg-[#07070B]"
+                    >
+                      <img
+                        src={src}
+                        alt="MOVR screen"
+                        className="h-[60vh] w-full object-contain"
+                      />
+                    </div>
+                  ))}
+                </div>
+                <div className="hidden max-h-[92vh] space-y-6 overflow-y-auto pb-6 md:block">
+                  {[
+                    
+                    "/screen2.png",
+                    "/screen3.png",
+                    "/screen4.png",
+                    "/screen5.png",
+                    "/screen6.png",
+                    "/screen7.png",
+                    "/screen8.png",
+                    "/screen10.png",
+                  ].map((src) => (
+                    <div key={src} className="overflow-hidden md:h-[92vh]">
+                      <img
+                        src={src}
+                        alt="MOVR screen"
+                        className="h-full w-full object-contain"
+                      />
+                    </div>
+                  ))}
                 </div>
                 <div className="text-center text-xs text-white/50">
-                  Swipe to view more
+                  Scroll to view more
                 </div>
               </div>
             </div>
