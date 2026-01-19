@@ -296,7 +296,7 @@ export default function MOVRLanding() {
       <main className="relative z-10 mx-auto max-w-7xl px-5 pb-24 pt-10 md:pt-14">
         {/* Vi tar bort 2-kol layouten här för att inte tvinga korten smalare */}
         <div className="max-w-3xl">
-          <div className="flex min-h-[100svh] flex-col justify-center -translate-y-20 md:min-h-0 md:translate-y-45">
+          <div className="flex min-h-[100svh] flex-col justify-center -translate-y-20 md:min-h-0 md:translate-y-15">
             <motion.h1
               initial={false}
               aria-label={headline}
@@ -407,13 +407,15 @@ export default function MOVRLanding() {
             </div>
           </motion.div>
 
+        </div>
+
         {/* CTA (ORÖRD från din kod) */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={typingDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
-            className="mt-4 flex flex-col gap-3 sm:flex-row sm:justify-end"
-          >
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={typingDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+          className="mt-4 flex flex-col gap-3 sm:flex-row sm:justify-start md:mr-auto md:max-w-3xl md:-translate-y-[13rem]"
+        >
           <button
             type="button"
             onClick={() => {
@@ -436,8 +438,7 @@ export default function MOVRLanding() {
             Join waitlist
             <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </button>
-          </motion.div>
-        </div>
+        </motion.div>
 
         <div className="mt-16 text-center text-[12px] text-white/38">
           © 2026 MOVR. All rights reserved.
