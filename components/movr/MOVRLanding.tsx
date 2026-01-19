@@ -379,7 +379,17 @@ export default function MOVRLanding() {
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/[0.06] p-4 shadow-[0_20px_60px_rgba(0,0,0,0.45)] backdrop-blur">
+              <div
+                role="button"
+                tabIndex={0}
+                onClick={() => setAppPreviewOpen(true)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    setAppPreviewOpen(true);
+                  }
+                }}
+                className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/[0.06] p-4 shadow-[0_20px_60px_rgba(0,0,0,0.45)] backdrop-blur cursor-pointer"
+              >
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(460px_220px_at_0%_0%,rgba(255,255,255,0.10),transparent_60%)]" />
                 <div className="relative flex items-center justify-between gap-4">
                   <div className="text-sm font-medium text-white/90">
@@ -401,7 +411,17 @@ export default function MOVRLanding() {
                   />
                 </div>
               </div>
-              <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/[0.06] p-4 shadow-[0_20px_60px_rgba(0,0,0,0.45)] backdrop-blur">
+              <div
+                role="button"
+                tabIndex={0}
+                onClick={() => setWebPreviewOpen(true)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    setWebPreviewOpen(true);
+                  }
+                }}
+                className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/[0.06] p-4 shadow-[0_20px_60px_rgba(0,0,0,0.45)] backdrop-blur cursor-pointer"
+              >
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(460px_220px_at_0%_0%,rgba(255,255,255,0.10),transparent_60%)]" />
                 <div className="relative flex items-center justify-between gap-4">
                   <div className="text-sm font-medium text-white/90">
@@ -521,7 +541,10 @@ export default function MOVRLanding() {
             className="absolute inset-0 bg-black/55 backdrop-blur-sm"
             onClick={() => setAppPreviewOpen(false)}
           />
-          <div className="relative z-10">
+          <div
+            className="relative z-10"
+            onClick={() => setAppPreviewOpen(false)}
+          >
             <button
               type="button"
               onClick={() => setAppPreviewOpen(false)}
@@ -540,7 +563,8 @@ export default function MOVRLanding() {
                       <img
                         src={src}
                         alt="App mockup"
-                        className="h-full w-screen object-contain"
+                        onClick={(event) => event.stopPropagation()}
+                        className="max-h-[96svh] max-w-[96vw] h-auto w-auto object-contain"
                       />
                     </div>
                   ))}
@@ -554,7 +578,8 @@ export default function MOVRLanding() {
                       <img
                         src={src}
                         alt="App mockup"
-                        className="h-full w-[80vw] object-contain"
+                        onClick={(event) => event.stopPropagation()}
+                        className="max-h-[94vh] max-w-[94vw] h-auto w-auto object-contain"
                       />
                     </div>
                   ))}
@@ -573,7 +598,10 @@ export default function MOVRLanding() {
             className="absolute inset-0 bg-black/55 backdrop-blur-sm"
             onClick={() => setWebPreviewOpen(false)}
           />
-          <div className="relative z-10">
+          <div
+            className="relative z-10"
+            onClick={() => setWebPreviewOpen(false)}
+          >
             <button
               type="button"
               onClick={() => setWebPreviewOpen(false)}
@@ -592,7 +620,8 @@ export default function MOVRLanding() {
                       <img
                         src={src}
                         alt="Web mockup"
-                        className="h-full w-screen object-contain"
+                        onClick={(event) => event.stopPropagation()}
+                        className="max-h-[96svh] max-w-[96vw] h-auto w-auto object-contain"
                       />
                     </div>
                   ))}
@@ -606,7 +635,8 @@ export default function MOVRLanding() {
                       <img
                         src={src}
                         alt="Web mockup"
-                        className="h-full w-[80vw] object-contain"
+                        onClick={(event) => event.stopPropagation()}
+                        className="max-h-[94vh] max-w-[94vw] h-auto w-auto object-contain"
                       />
                     </div>
                   ))}
