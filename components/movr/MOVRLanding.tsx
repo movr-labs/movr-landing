@@ -47,7 +47,7 @@ function Modal({
             <button
               type="button"
               onClick={onClose}
-              className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1.5 text-white/70 hover:bg-white/10"
+              className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1.5 text-white/70 hover:bg-white/10 cursor-pointer"
               aria-label="Close"
             >
               ✕
@@ -211,6 +211,20 @@ export default function MOVRLanding() {
   const [waitlistError, setWaitlistError] = useState<string | null>(null);
   const [typedText, setTypedText] = useState("");
   const [typingDone, setTypingDone] = useState(false);
+  
+  useEffect(() => {
+    if (!appPreviewOpen && !webPreviewOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setAppPreviewOpen(false);
+        setWebPreviewOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [appPreviewOpen, webPreviewOpen]);
 
   useEffect(() => {
     let index = 0;
@@ -341,7 +355,7 @@ export default function MOVRLanding() {
                 <button
                   type="button"
                   onClick={() => setFeaturesExpanded((prev) => !prev)}
-                  className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70 hover:bg-white/10"
+                  className="cursor-pointer inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70 hover:bg-white/10"
                 >
                   {featuresExpanded ? "See less" : "See more"}
                 </button>
@@ -368,7 +382,7 @@ export default function MOVRLanding() {
                   <button
                     type="button"
                     onClick={() => setAppPreviewOpen(true)}
-                    className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70 hover:bg-white/10"
+                    className="cursor-pointer rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70 hover:bg-white/10"
                   >
                     See more
                   </button>
@@ -390,7 +404,7 @@ export default function MOVRLanding() {
                   <button
                     type="button"
                     onClick={() => setWebPreviewOpen(true)}
-                    className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70 hover:bg-white/10"
+                    className="cursor-pointer rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70 hover:bg-white/10"
                   >
                     See more
                   </button>
@@ -422,7 +436,7 @@ export default function MOVRLanding() {
               setPilotSubmitted(false);
               setPilotOpen(true);
             }}
-            className="inline-flex h-12 w-full items-center justify-center rounded-2xl bg-gradient-to-br from-[#241245] via-[#321667] to-[#653ADF] px-5 text-sm font-medium text-white shadow-lg shadow-[#120824]/45 hover:from-[#1D0E38] hover:via-[#2A1357] hover:to-[#5632C1] sm:w-auto"
+            className="cursor-pointer inline-flex h-12 w-full items-center justify-center rounded-2xl bg-gradient-to-br from-[#241245] via-[#321667] to-[#653ADF] px-5 text-sm font-medium text-white shadow-lg shadow-[#120824]/45 hover:from-[#1D0E38] hover:via-[#2A1357] hover:to-[#5632C1] sm:w-auto"
           >
             Become a pilot customer (for free)
           </button>
@@ -433,7 +447,7 @@ export default function MOVRLanding() {
               setWaitlistSubmitted(false);
               setWaitlistOpen(true);
             }}
-            className="group inline-flex h-12 w-full items-center justify-center rounded-2xl bg-white px-5 text-sm font-medium text-black shadow-lg shadow-black/25 hover:bg-white/90 sm:w-auto"
+            className="cursor-pointer group inline-flex h-12 w-full items-center justify-center rounded-2xl bg-white px-5 text-sm font-medium text-black shadow-lg shadow-black/25 hover:bg-white/90 sm:w-auto"
           >
             Join waitlist
             <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -505,7 +519,7 @@ export default function MOVRLanding() {
             <button
               type="button"
               onClick={() => setAppPreviewOpen(false)}
-              className="absolute right-4 top-4 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-white/80 hover:bg-white/20"
+              className="cursor-pointer absolute right-4 top-4 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-white/80 hover:bg-white/20"
             >
               Close
             </button>
@@ -551,7 +565,7 @@ export default function MOVRLanding() {
             <button
               type="button"
               onClick={() => setWebPreviewOpen(false)}
-              className="absolute right-4 top-4 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-white/80 hover:bg-white/20"
+              className="cursor-pointer absolute right-4 top-4 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-white/80 hover:bg-white/20"
             >
               Close
             </button>
