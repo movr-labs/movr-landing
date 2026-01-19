@@ -353,9 +353,10 @@ export default function MOVRLanding() {
             {/* LEFT CARD */}
             <div className="relative flex w-full flex-col overflow-hidden rounded-3xl border border-white/15 bg-white/[0.06] p-4 shadow-[0_24px_70px_rgba(0,0,0,0.5)] backdrop-blur md:self-start md:p-5">
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(600px_240px_at_0%_0%,rgba(255,255,255,0.12),transparent_60%),radial-gradient(500px_300px_at_100%_20%,rgba(120,200,255,0.10),transparent_60%)]" />
-              <div className="relative flex items-center justify-between gap-4">
-                <div className="text-base font-semibold text-white/95">
-                  Everything your academy needs - in one system
+              <div className="relative flex items-start justify-between gap-4">
+                <div className="text-base font-semibold leading-snug text-white/95">
+                  <span className="block">Everything your academy</span>
+                  <span className="block">needs - in one system</span>
                 </div>
                 <button
                   type="button"
