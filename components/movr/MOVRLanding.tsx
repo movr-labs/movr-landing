@@ -530,7 +530,7 @@ export default function MOVRLanding() {
             </button>
             <div className="flex h-full w-full items-start pt-0">
               <div className="mx-auto w-full max-w-none px-0 md:px-4">
-                <div className="flex max-h-[100dvh] w-full gap-6 overflow-x-auto overflow-y-hidden pb-6 pt-1 md:hidden">
+                <div className="flex h-[100svh] w-full gap-6 overflow-x-auto overflow-y-hidden pb-6 pt-1 md:hidden">
                   {appPreviews.map((src) => (
                     <div
                       key={src}
@@ -539,7 +539,7 @@ export default function MOVRLanding() {
                       <img
                         src={src}
                         alt="App mockup"
-                        className="h-[100dvh] w-screen object-contain"
+                        className="h-full w-screen object-contain"
                       />
                     </div>
                   ))}
@@ -582,7 +582,7 @@ export default function MOVRLanding() {
             </button>
             <div className="flex h-full w-full items-start pt-0">
               <div className="mx-auto w-full max-w-none px-0 md:px-4">
-                <div className="flex max-h-[100dvh] w-full gap-6 overflow-x-auto overflow-y-hidden pb-6 pt-1 md:hidden">
+                <div className="flex h-[100svh] w-full gap-6 overflow-x-auto overflow-y-hidden pb-6 pt-1 md:hidden">
                   {webPreviews.map((src) => (
                     <div
                       key={src}
@@ -591,7 +591,7 @@ export default function MOVRLanding() {
                       <img
                         src={src}
                         alt="Web mockup"
-                        className="h-[100dvh] w-screen object-contain"
+                        className="h-full w-screen object-contain"
                       />
                     </div>
                   ))}
