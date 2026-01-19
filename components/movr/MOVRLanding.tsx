@@ -442,7 +442,7 @@ export default function MOVRLanding() {
               setPilotSubmitted(false);
               setPilotOpen(true);
             }}
-            className="cursor-pointer inline-flex h-12 w-full items-center justify-center rounded-2xl bg-gradient-to-br from-[#241245] via-[#321667] to-[#653ADF] px-5 text-sm font-medium text-white shadow-lg shadow-[#120824]/45 hover:from-[#1D0E38] hover:via-[#2A1357] hover:to-[#5632C1] sm:w-auto"
+            className="cursor-pointer inline-flex h-12 w-full items-center justify-center rounded-2xl bg-gradient-to-br from-[#2F1758] via-[#3C1D7C] to-[#7249F0] px-5 text-[15px] font-medium text-white shadow-lg shadow-[#140A2A]/45 hover:from-[#27134A] hover:via-[#34196A] hover:to-[#6641DB] sm:w-auto"
           >
             Become a pilot customer (for free)
           </button>
@@ -453,7 +453,7 @@ export default function MOVRLanding() {
               setWaitlistSubmitted(false);
               setWaitlistOpen(true);
             }}
-            className="cursor-pointer group inline-flex h-12 w-full items-center justify-center rounded-2xl bg-white px-5 text-sm font-medium text-black shadow-lg shadow-black/25 hover:bg-white/90 sm:w-auto"
+            className="cursor-pointer group inline-flex h-12 w-full items-center justify-center rounded-2xl bg-white px-5 text-[15px] font-medium text-black shadow-lg shadow-black/25 hover:bg-white/90 sm:w-auto"
           >
             Join waitlist
             <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
