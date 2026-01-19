@@ -512,22 +512,22 @@ export default function MOVRLanding() {
               <div className="mx-auto w-full max-w-none px-0 md:px-4">
                 <div className="max-h-[100dvh] space-y-8 overflow-y-auto pb-6 md:hidden">
                   {appPreviews.map((src) => (
-                    <div key={src} className="w-screen overflow-hidden">
+                    <div key={src} className="flex flex-col items-center w-full">
                       <img
                         src={src}
                         alt="App mockup"
-                        className="h-[100dvh] w-screen object-contain"
+                        className="w-full max-w-[90%] h-auto object-top"
                       />
                     </div>
                   ))}
                 </div>
-                <div className="hidden max-h-[92vh] space-y-2 overflow-y-auto pb-6 md:block">
+                <div className="hidden max-h-[92vh] space-y-12 overflow-y-auto pb-12 md:block">
                   {appPreviews.map((src) => (
-                    <div key={src} className="overflow-hidden md:h-[92vh]">
+                    <div key={src} className="flex justify-center w-full">
                       <img
                         src={src}
                         alt="App mockup"
-                        className="h-full w-full object-contain"
+                        className="w-[400px] h-auto"
                       />
                     </div>
                   ))}
