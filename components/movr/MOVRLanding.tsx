@@ -564,7 +564,7 @@ export default function MOVRLanding() {
                           src={src}
                           alt="App mockup"
                           onClick={(event) => event.stopPropagation()}
-                          className="justify-self-center max-h-[96svh] max-w-[56vw] h-auto w-auto object-contain"
+                          className="justify-self-center max-h-[96svh] max-w-[90vw] h-auto w-auto object-contain"
                         />
                       </div>
                     </div>
@@ -625,7 +625,7 @@ export default function MOVRLanding() {
                           src={src}
                           alt="Web mockup"
                           onClick={(event) => event.stopPropagation()}
-                          className="justify-self-center max-h-[96svh] max-w-[90vw] h-auto w-auto object-contain"
+                          className="justify-self-center max-h-[96svh] max-w-[95vw] h-auto w-auto object-contain"
                         />
                       </div>
                     </div>
