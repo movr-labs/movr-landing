@@ -110,7 +110,7 @@ function Modal({
               >
                 <label className="block">
                   <span className="text-[12px] uppercase tracking-[0.12em] text-white/55">
-                    Academy nameeee
+                    Academy name
                   </span>
                   <input
                     type="text"
