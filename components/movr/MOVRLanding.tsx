@@ -267,26 +267,26 @@ export default function MOVRLanding() {
     "Time tracking for staff",
   ];
   const appPreviews = [
-    "/stitch_payment_summary/campaign_management/h1.png",
-    "/stitch_payment_summary/class_schedule/h2.png",
+    "/stitch_payment_summary/smart_scheduler/h9.png",
+    "/stitch_payment_summary/staff_timesheets/h10.png",
     "/stitch_payment_summary/customer_directory/h3.png",
     
     "/stitch_payment_summary/financial_kpi_overview/h5.png",
-    "/stitch_payment_summary/live_insights/h6.png",
+    "/stitch_payment_summary/campaign_management/h1.png",
     "/stitch_payment_summary/membership_&_access/h7.png",
     "/stitch_payment_summary/payment_summary/h8.png",
-    "/stitch_payment_summary/smart_scheduler/h9.png",
-    "/stitch_payment_summary/staff_timesheets/h10.png",
+    "/stitch_payment_summary/class_schedule/h2.png",
+    "/stitch_payment_summary/live_insights/h6.png",
   ];
   const webPreviews = [
     "/screen.png",
-    "/screen2.png",
-    "/screen3.png",
-    "/screen4.png",
-    "/screen5.png",
     "/screen6.png",
-    "/screen7.png",
+    "/screen3.png",
     "/screen8.png",
+    "/screen5.png",
+    "/screen2.png",
+    "/screen4.png",
+    "/screen7.png",
   ];
 
   return (
