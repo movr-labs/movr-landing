@@ -278,17 +278,6 @@ export default function MOVRLanding() {
     "/stitch_payment_summary/smart_scheduler/h9.png",
     "/stitch_payment_summary/staff_timesheets/h10.png",
   ];
-  const appPreviewDescriptions = [
-    "Kampanjstyrning med tydliga KPI:er och status i realtid.",
-    "Schemalaggning av klasser med kapacitet och instruktorsvy.",
-    "Kundregister med medlemsstatus och snabb atkomst till historik.",
-    "Ekonomisk oversikt med nyckeltal, trendlinjer och intakter.",
-    "Live-insikter som visar belaggning och aktuella bokningar.",
-    "Medlemskap och accesskort i mobilen for smidig inpassering.",
-    "Betalningssammanfattning med forfallodatum och automatiska floden.",
-    "Smart schemalaggare som foreslar optimala tider.",
-    "Tidrapportering for personal med pass, timmar och attest.",
-  ];
   const webPreviews = [
     "/screen.png",
     "/screen2.png",
@@ -298,16 +287,6 @@ export default function MOVRLanding() {
     "/screen6.png",
     "/screen7.png",
     "/screen8.png",
-  ];
-  const webPreviewDescriptions = [
-    "Publik landningssida med tydligt vardeforslag och CTA.",
-    "Programoversikt med filtrering och fokus pa conversion.",
-    "Instruktorsprofiler som bygger trovarde och narhet.",
-    "Prissida med paketjamforelse och tydliga fordelar.",
-    "FAQ och policysektion for att undanroja friktion.",
-    "Galleri med stammningsfulla bilder och social proof.",
-    "Kontakt- och bokningsflode for snabba forfragningar.",
-    "Footer med sociala kanaler och snabb navigation.",
   ];
 
   return (
@@ -580,17 +559,13 @@ export default function MOVRLanding() {
                       key={src}
                       className="flex w-screen flex-shrink-0 items-center justify-center overflow-hidden"
                     >
-                      <div className="grid w-full grid-cols-[1fr_minmax(0,1fr)_1fr] items-center px-4">
-                        <div className="justify-self-end pr-4 w-[38vw] max-w-[320px] text-left text-sm text-white/85">
-                          {appPreviewDescriptions[index]}
-                        </div>
+                      <div className="flex w-full items-center justify-center px-4">
                         <img
                           src={src}
                           alt="App mockup"
                           onClick={(event) => event.stopPropagation()}
                           className="justify-self-center max-h-[96svh] max-w-[56vw] h-auto w-auto object-contain"
                         />
-                        <div className="w-[38vw] max-w-[320px]" aria-hidden />
                       </div>
                     </div>
                   ))}
@@ -601,17 +576,13 @@ export default function MOVRLanding() {
                       key={src}
                       className="flex h-[92vh] w-screen flex-shrink-0 items-center justify-center overflow-hidden"
                     >
-                      <div className="grid w-full grid-cols-[1fr_minmax(0,1fr)_1fr] items-center px-6">
-                        <div className="justify-self-end pr-8 w-[28vw] max-w-[320px] text-left text-base text-white/85">
-                          {appPreviewDescriptions[index]}
-                        </div>
+                      <div className="flex w-full items-center justify-center px-6">
                         <img
                           src={src}
                           alt="App mockup"
                           onClick={(event) => event.stopPropagation()}
                           className="justify-self-center max-h-[94vh] max-w-[60vw] h-auto w-auto object-contain"
                         />
-                        <div className="w-[28vw] max-w-[320px]" aria-hidden />
                       </div>
                     </div>
                   ))}
@@ -649,17 +620,13 @@ export default function MOVRLanding() {
                       key={src}
                       className="flex w-screen flex-shrink-0 items-center justify-center overflow-hidden"
                     >
-                      <div className="grid w-full grid-cols-[1fr_minmax(0,1fr)_1fr] items-center px-4">
-                        <div className="justify-self-end pr-4 w-[38vw] max-w-[320px] text-left text-sm text-white/85">
-                          {webPreviewDescriptions[index]}
-                        </div>
+                      <div className="flex w-full items-center justify-center px-4">
                         <img
                           src={src}
                           alt="Web mockup"
                           onClick={(event) => event.stopPropagation()}
-                          className="justify-self-center max-h-[96svh] max-w-[56vw] h-auto w-auto object-contain"
+                          className="justify-self-center max-h-[96svh] max-w-[90vw] h-auto w-auto object-contain"
                         />
-                        <div className="w-[38vw] max-w-[320px]" aria-hidden />
                       </div>
                     </div>
                   ))}
@@ -670,17 +637,13 @@ export default function MOVRLanding() {
                       key={src}
                       className="flex h-[92vh] w-screen flex-shrink-0 items-center justify-center overflow-hidden"
                     >
-                      <div className="grid w-full grid-cols-[1fr_minmax(0,1fr)_1fr] items-center px-6">
-                        <div className="justify-self-end pr-8 w-[28vw] max-w-[320px] text-left text-base text-white/85">
-                          {webPreviewDescriptions[index]}
-                        </div>
+                      <div className="flex w-full items-center justify-center px-6">
                         <img
                           src={src}
                           alt="Web mockup"
                           onClick={(event) => event.stopPropagation()}
-                          className="justify-self-center max-h-[94vh] max-w-[60vw] h-auto w-auto object-contain"
+                          className="justify-self-center max-h-[94vh] max-w-[86vw] h-auto w-auto object-contain"
                         />
-                        <div className="w-[28vw] max-w-[320px]" aria-hidden />
                       </div>
                     </div>
                   ))}
