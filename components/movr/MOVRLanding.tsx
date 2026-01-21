@@ -307,7 +307,7 @@ export default function MOVRLanding() {
     "/screen7.png",
   ];
   const scrollDesktopBy = (
-    containerRef: React.RefObject<HTMLDivElement>,
+    containerRef: React.RefObject<HTMLDivElement | null>,
     direction: "next" | "prev"
   ) => {
     const el = containerRef.current;
@@ -330,7 +330,7 @@ export default function MOVRLanding() {
   };
 
   const makeDragHandlers = (
-    containerRef: React.RefObject<HTMLDivElement>,
+    containerRef: React.RefObject<HTMLDivElement | null>,
     dragRef: React.MutableRefObject<{
       isDown: boolean;
       startX: number;
