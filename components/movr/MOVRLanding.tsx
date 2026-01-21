@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ManaBackground from "./ManaBackground";
 
 function Modal({
@@ -211,6 +211,10 @@ export default function MOVRLanding() {
   const [waitlistError, setWaitlistError] = useState<string | null>(null);
   const [typedText, setTypedText] = useState("");
   const [typingDone, setTypingDone] = useState(false);
+  const appDesktopRef = useRef<HTMLDivElement | null>(null);
+  const webDesktopRef = useRef<HTMLDivElement | null>(null);
+  const appDragState = useRef({ isDown: false, startX: 0, scrollLeft: 0 });
+  const webDragState = useRef({ isDown: false, startX: 0, scrollLeft: 0 });
   
   useEffect(() => {
     if (!appPreviewOpen && !webPreviewOpen) return;
@@ -219,6 +223,20 @@ export default function MOVRLanding() {
       if (e.key === "Escape") {
         setAppPreviewOpen(false);
         setWebPreviewOpen(false);
+      }
+      if (e.key === "ArrowRight") {
+        if (appPreviewOpen) {
+          scrollDesktopBy(appDesktopRef, "next");
+        } else if (webPreviewOpen) {
+          scrollDesktopBy(webDesktopRef, "next");
+        }
+      }
+      if (e.key === "ArrowLeft") {
+        if (appPreviewOpen) {
+          scrollDesktopBy(appDesktopRef, "prev");
+        } else if (webPreviewOpen) {
+          scrollDesktopBy(webDesktopRef, "prev");
+        }
       }
     };
 
@@ -288,6 +306,60 @@ export default function MOVRLanding() {
     "/screen4.png",
     "/screen7.png",
   ];
+  const scrollDesktopBy = (
+    containerRef: React.RefObject<HTMLDivElement>,
+    direction: "next" | "prev"
+  ) => {
+    const el = containerRef.current;
+    if (!el) return;
+    const slides = Array.from(el.children) as HTMLDivElement[];
+    if (!slides.length) return;
+    const currentCenter = el.scrollLeft + el.clientWidth / 2;
+    const getSlideCenter = (slide: HTMLDivElement) =>
+      slide.offsetLeft + slide.clientWidth / 2;
+    const candidates =
+      direction === "next"
+        ? slides.filter((slide) => getSlideCenter(slide) > currentCenter + 1)
+        : slides.filter((slide) => getSlideCenter(slide) < currentCenter - 1);
+    const target = candidates.length
+      ? candidates[0]
+      : slides[slides.length - 1];
+    const targetCenter = getSlideCenter(target);
+    const targetScrollLeft = Math.max(0, targetCenter - el.clientWidth / 2);
+    el.scrollTo({ left: targetScrollLeft, behavior: "smooth" });
+  };
+
+  const makeDragHandlers = (
+    containerRef: React.RefObject<HTMLDivElement>,
+    dragRef: React.MutableRefObject<{
+      isDown: boolean;
+      startX: number;
+      scrollLeft: number;
+    }>
+  ) => ({
+    onMouseDown: (event: React.MouseEvent<HTMLDivElement>) => {
+      if (event.button !== 0 || !containerRef.current) return;
+      dragRef.current.isDown = true;
+      dragRef.current.startX = event.pageX - containerRef.current.offsetLeft;
+      dragRef.current.scrollLeft = containerRef.current.scrollLeft;
+      event.preventDefault();
+    },
+    onMouseMove: (event: React.MouseEvent<HTMLDivElement>) => {
+      if (!dragRef.current.isDown || !containerRef.current) return;
+      const x = event.pageX - containerRef.current.offsetLeft;
+      const walk = (x - dragRef.current.startX) * 1.2;
+      containerRef.current.scrollLeft = dragRef.current.scrollLeft - walk;
+    },
+    onMouseUp: () => {
+      dragRef.current.isDown = false;
+    },
+    onMouseLeave: () => {
+      dragRef.current.isDown = false;
+    },
+  });
+
+  const appDragHandlers = makeDragHandlers(appDesktopRef, appDragState);
+  const webDragHandlers = makeDragHandlers(webDesktopRef, webDragState);
 
   return (
     <div className="relative min-h-screen overflow-y-auto text-white">
@@ -547,7 +619,7 @@ export default function MOVRLanding() {
             <button
               type="button"
               onClick={() => setAppPreviewOpen(false)}
-              className="cursor-pointer absolute right-4 top-4 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-white/80 hover:bg-white/20"
+              className="cursor-pointer absolute right-4 top-4 z-20 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-white/80 hover:bg-white/20 pointer-events-auto"
             >
               Close
             </button>
@@ -570,22 +642,42 @@ export default function MOVRLanding() {
                     </div>
                   ))}
                 </div>
-                <div className="hidden max-h-[92vh] w-full gap-6 overflow-x-auto overflow-y-hidden pb-6 pt-1 md:flex">
-                  {appPreviews.map((src, index) => (
-                    <div
-                      key={src}
-                      className="flex h-[92vh] w-screen flex-shrink-0 items-center justify-center overflow-hidden"
-                    >
-                      <div className="flex w-full items-center justify-center px-6">
-                        <img
-                          src={src}
-                          alt="App mockup"
-                          onClick={(event) => event.stopPropagation()}
-                          className="justify-self-center max-h-[94vh] max-w-[60vw] h-auto w-auto object-contain"
-                        />
+                <div className="relative hidden w-full md:block">
+                  <div
+                    ref={appDesktopRef}
+                    className="flex max-h-[92vh] w-full gap-6 overflow-x-auto overflow-y-hidden pb-6 pt-1 cursor-grab active:cursor-grabbing [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                    onClick={(event) => event.stopPropagation()}
+                    tabIndex={0}
+                    aria-label="App previews"
+                    {...appDragHandlers}
+                  >
+                    {appPreviews.map((src, index) => (
+                      <div
+                        key={src}
+                        className="flex h-[92vh] w-screen flex-shrink-0 items-center justify-center overflow-hidden"
+                      >
+                        <div className="flex w-full items-center justify-center px-6">
+                          <img
+                            src={src}
+                            alt="App mockup"
+                            onClick={(event) => event.stopPropagation()}
+                            className="justify-self-center max-h-[94vh] max-w-[60vw] h-auto w-auto object-contain"
+                          />
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      scrollDesktopBy(appDesktopRef, "next");
+                    }}
+                    className="cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-black/45 p-2 text-white/90 shadow-lg hover:bg-black/60"
+                    aria-label="Next image"
+                  >
+                    <ArrowRight className="h-5 w-5" aria-hidden="true" />
+                  </button>
                 </div>
                 <div className="text-center text-xs text-white/50">
                   Scroll to view more
@@ -608,7 +700,7 @@ export default function MOVRLanding() {
             <button
               type="button"
               onClick={() => setWebPreviewOpen(false)}
-              className="cursor-pointer absolute right-4 top-4 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-white/80 hover:bg-white/20"
+              className="cursor-pointer absolute right-4 top-4 z-20 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-white/80 hover:bg-white/20 pointer-events-auto"
             >
               Close
             </button>
@@ -631,22 +723,42 @@ export default function MOVRLanding() {
                     </div>
                   ))}
                 </div>
-                <div className="hidden max-h-[92vh] w-full gap-6 overflow-x-auto overflow-y-hidden pb-6 pt-1 md:flex">
-                  {webPreviews.map((src, index) => (
-                    <div
-                      key={src}
-                      className="flex h-[92vh] w-screen flex-shrink-0 items-center justify-center overflow-hidden"
-                    >
-                      <div className="flex w-full items-center justify-center px-6">
-                        <img
-                          src={src}
-                          alt="Web mockup"
-                          onClick={(event) => event.stopPropagation()}
-                          className="justify-self-center max-h-[94vh] max-w-[86vw] h-auto w-auto object-contain"
-                        />
+                <div className="relative hidden w-full md:block">
+                  <div
+                    ref={webDesktopRef}
+                    className="flex max-h-[92vh] w-full gap-6 overflow-x-auto overflow-y-hidden pb-6 pt-1 cursor-grab active:cursor-grabbing [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                    onClick={(event) => event.stopPropagation()}
+                    tabIndex={0}
+                    aria-label="Web previews"
+                    {...webDragHandlers}
+                  >
+                    {webPreviews.map((src, index) => (
+                      <div
+                        key={src}
+                        className="flex h-[92vh] w-screen flex-shrink-0 items-center justify-center overflow-hidden"
+                      >
+                        <div className="flex w-full items-center justify-center px-6">
+                          <img
+                            src={src}
+                            alt="Web mockup"
+                            onClick={(event) => event.stopPropagation()}
+                            className="justify-self-center max-h-[94vh] max-w-[86vw] h-auto w-auto object-contain"
+                          />
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      scrollDesktopBy(webDesktopRef, "next");
+                    }}
+                    className="cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-black/45 p-2 text-white/90 shadow-lg hover:bg-black/60"
+                    aria-label="Next image"
+                  >
+                    <ArrowRight className="h-5 w-5" aria-hidden="true" />
+                  </button>
                 </div>
                 <div className="text-center text-xs text-white/50">
                   Scroll to view more
