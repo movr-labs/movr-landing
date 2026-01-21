@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import ManaBackground from "./ManaBackground";
 
@@ -211,6 +211,10 @@ export default function MOVRLanding() {
   const [waitlistError, setWaitlistError] = useState<string | null>(null);
   const [typedText, setTypedText] = useState("");
   const [typingDone, setTypingDone] = useState(false);
+  const [appCanPrev, setAppCanPrev] = useState(false);
+  const [appCanNext, setAppCanNext] = useState(false);
+  const [webCanPrev, setWebCanPrev] = useState(false);
+  const [webCanNext, setWebCanNext] = useState(false);
   const appDesktopRef = useRef<HTMLDivElement | null>(null);
   const webDesktopRef = useRef<HTMLDivElement | null>(null);
   const appDragState = useRef({ isDown: false, startX: 0, scrollLeft: 0 });
@@ -310,23 +314,53 @@ export default function MOVRLanding() {
     containerRef: React.RefObject<HTMLDivElement | null>,
     direction: "next" | "prev"
   ) => {
-    const el = containerRef.current;
-    if (!el) return;
-    const slides = Array.from(el.children) as HTMLDivElement[];
-    if (!slides.length) return;
-    const currentCenter = el.scrollLeft + el.clientWidth / 2;
-    const getSlideCenter = (slide: HTMLDivElement) =>
-      slide.offsetLeft + slide.clientWidth / 2;
-    const candidates =
+    const meta = getSlideMeta(containerRef);
+    if (!meta) return;
+    const { el, slides, closestIndex, getSlideCenter } = meta;
+    const targetIndex =
       direction === "next"
-        ? slides.filter((slide) => getSlideCenter(slide) > currentCenter + 1)
-        : slides.filter((slide) => getSlideCenter(slide) < currentCenter - 1);
-    const target = candidates.length
-      ? candidates[0]
-      : slides[slides.length - 1];
+        ? Math.min(closestIndex + 1, slides.length - 1)
+        : Math.max(closestIndex - 1, 0);
+    if (targetIndex === closestIndex) return;
+    const target = slides[targetIndex];
     const targetCenter = getSlideCenter(target);
     const targetScrollLeft = Math.max(0, targetCenter - el.clientWidth / 2);
     el.scrollTo({ left: targetScrollLeft, behavior: "smooth" });
+  };
+  const getSlideMeta = (
+    containerRef: React.RefObject<HTMLDivElement | null>
+  ) => {
+    const el = containerRef.current;
+    if (!el) return null;
+    const slides = Array.from(el.children) as HTMLDivElement[];
+    if (!slides.length) return null;
+    const currentCenter = el.scrollLeft + el.clientWidth / 2;
+    const getSlideCenter = (slide: HTMLDivElement) =>
+      slide.offsetLeft + slide.clientWidth / 2;
+    let closestIndex = 0;
+    let closestDistance = Infinity;
+    slides.forEach((slide, index) => {
+      const distance = Math.abs(getSlideCenter(slide) - currentCenter);
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestIndex = index;
+      }
+    });
+    return { el, slides, closestIndex, getSlideCenter };
+  };
+  const updateNavState = (
+    containerRef: React.RefObject<HTMLDivElement | null>,
+    setPrev: React.Dispatch<React.SetStateAction<boolean>>,
+    setNext: React.Dispatch<React.SetStateAction<boolean>>
+  ) => {
+    const meta = getSlideMeta(containerRef);
+    if (!meta) {
+      setPrev(false);
+      setNext(false);
+      return;
+    }
+    setPrev(meta.closestIndex > 0);
+    setNext(meta.closestIndex < meta.slides.length - 1);
   };
 
   const makeDragHandlers = (
@@ -360,6 +394,22 @@ export default function MOVRLanding() {
 
   const appDragHandlers = makeDragHandlers(appDesktopRef, appDragState);
   const webDragHandlers = makeDragHandlers(webDesktopRef, webDragState);
+
+  useEffect(() => {
+    if (!appPreviewOpen) return;
+    const id = requestAnimationFrame(() => {
+      updateNavState(appDesktopRef, setAppCanPrev, setAppCanNext);
+    });
+    return () => cancelAnimationFrame(id);
+  }, [appPreviewOpen]);
+
+  useEffect(() => {
+    if (!webPreviewOpen) return;
+    const id = requestAnimationFrame(() => {
+      updateNavState(webDesktopRef, setWebCanPrev, setWebCanNext);
+    });
+    return () => cancelAnimationFrame(id);
+  }, [webPreviewOpen]);
 
   return (
     <div className="relative min-h-screen overflow-y-auto text-white">
@@ -647,6 +697,9 @@ export default function MOVRLanding() {
                     ref={appDesktopRef}
                     className="flex max-h-[92vh] w-full gap-6 overflow-x-auto overflow-y-hidden pb-6 pt-1 cursor-grab active:cursor-grabbing [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
                     onClick={(event) => event.stopPropagation()}
+                    onScroll={() => {
+                      updateNavState(appDesktopRef, setAppCanPrev, setAppCanNext);
+                    }}
                     tabIndex={0}
                     aria-label="App previews"
                     {...appDragHandlers}
@@ -667,17 +720,33 @@ export default function MOVRLanding() {
                       </div>
                     ))}
                   </div>
-                  <button
+                  <motion.button
+                    type="button"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      if (!appCanPrev) return;
+                      scrollDesktopBy(appDesktopRef, "prev");
+                    }}
+                    whileTap={{ scale: 0.9 }}
+                    className="cursor-pointer absolute left-4 top-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-black/45 p-2 text-white/90 shadow-lg hover:bg-black/60 disabled:cursor-not-allowed disabled:opacity-40"
+                    aria-label="Previous image"
+                    disabled={!appCanPrev}
+                  >
+                    <ArrowLeft className="h-5 w-5" aria-hidden="true" />
+                  </motion.button>
+                  <motion.button
                     type="button"
                     onClick={(event) => {
                       event.stopPropagation();
                       scrollDesktopBy(appDesktopRef, "next");
                     }}
-                    className="cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-black/45 p-2 text-white/90 shadow-lg hover:bg-black/60"
+                    whileTap={{ scale: 0.9 }}
+                    className="cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-black/45 p-2 text-white/90 shadow-lg hover:bg-black/60 disabled:cursor-not-allowed disabled:opacity-40"
                     aria-label="Next image"
+                    disabled={!appCanNext}
                   >
                     <ArrowRight className="h-5 w-5" aria-hidden="true" />
-                  </button>
+                  </motion.button>
                 </div>
                 <div className="text-center text-xs text-white/50">
                   Scroll to view more
@@ -728,6 +797,9 @@ export default function MOVRLanding() {
                     ref={webDesktopRef}
                     className="flex max-h-[92vh] w-full gap-6 overflow-x-auto overflow-y-hidden pb-6 pt-1 cursor-grab active:cursor-grabbing [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
                     onClick={(event) => event.stopPropagation()}
+                    onScroll={() => {
+                      updateNavState(webDesktopRef, setWebCanPrev, setWebCanNext);
+                    }}
                     tabIndex={0}
                     aria-label="Web previews"
                     {...webDragHandlers}
@@ -748,17 +820,33 @@ export default function MOVRLanding() {
                       </div>
                     ))}
                   </div>
-                  <button
+                  <motion.button
+                    type="button"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      if (!webCanPrev) return;
+                      scrollDesktopBy(webDesktopRef, "prev");
+                    }}
+                    whileTap={{ scale: 0.9 }}
+                    className="cursor-pointer absolute left-4 top-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-black/45 p-2 text-white/90 shadow-lg hover:bg-black/60 disabled:cursor-not-allowed disabled:opacity-40"
+                    aria-label="Previous image"
+                    disabled={!webCanPrev}
+                  >
+                    <ArrowLeft className="h-5 w-5" aria-hidden="true" />
+                  </motion.button>
+                  <motion.button
                     type="button"
                     onClick={(event) => {
                       event.stopPropagation();
                       scrollDesktopBy(webDesktopRef, "next");
                     }}
-                    className="cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-black/45 p-2 text-white/90 shadow-lg hover:bg-black/60"
+                    whileTap={{ scale: 0.9 }}
+                    className="cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-black/45 p-2 text-white/90 shadow-lg hover:bg-black/60 disabled:cursor-not-allowed disabled:opacity-40"
                     aria-label="Next image"
+                    disabled={!webCanNext}
                   >
                     <ArrowRight className="h-5 w-5" aria-hidden="true" />
-                  </button>
+                  </motion.button>
                 </div>
                 <div className="text-center text-xs text-white/50">
                   Scroll to view more
